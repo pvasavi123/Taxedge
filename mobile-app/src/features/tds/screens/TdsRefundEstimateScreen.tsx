@@ -2,7 +2,6 @@ import React from "react";
 import {
   View,
   Text,
-  StyleSheet,
   ScrollView,
   TouchableOpacity,
   StatusBar,
@@ -15,6 +14,7 @@ import { EstimatedRefundHeroCard } from "../components/estimate/EstimatedRefundH
 import { RefundBreakdownCard } from "../components/estimate/RefundBreakdownCard";
 import { EstimatedCalculationBanner } from "../components/estimate/EstimatedCalculationBanner";
 import { DEFAULT_TDS_ESTIMATE } from "../mock/estimateData";
+import { styles } from "./TdsRefundEstimateScreen.styles";
 
 export const TdsRefundEstimateScreen: React.FC = () => {
   const router = useRouter();
@@ -119,166 +119,5 @@ export const TdsRefundEstimateScreen: React.FC = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#F8F9FB",
-  },
-  header: {
-    minHeight: 58,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    paddingHorizontal: 16,
-    paddingVertical: 6,
-    backgroundColor: "#FFFFFF",
-    borderBottomWidth: 1,
-    borderBottomColor: "#F1F5F9",
-  },
-  backButton: {
-    width: 38,
-    height: 38,
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: "#E5E7EB",
-    backgroundColor: "#FFFFFF",
-    justifyContent: "center",
-    alignItems: "center",
-    ...Platform.select({
-      ios: {
-        shadowColor: "#0B1F3A",
-        shadowOffset: { width: 0, height: 1 },
-        shadowOpacity: 0.05,
-        shadowRadius: 2,
-      },
-      android: {
-        elevation: 1,
-      },
-      default: {},
-    }),
-  },
-  headerTitleGroup: {
-    alignItems: "center",
-    justifyContent: "center",
-    flex: 1,
-  },
-  headerTitle: {
-    fontSize: 18,
-    fontWeight: "700",
-    color: "#0B1F3A",
-    letterSpacing: -0.2,
-  },
-  headerSubtitle: {
-    fontSize: 12.5,
-    fontWeight: "500",
-    color: "#0B1F3A",
-    marginTop: 2,
-  },
-  headerRightSpacer: {
-    width: 38,
-  },
-  scrollContent: {
-    paddingHorizontal: 16,
-    paddingTop: 16,
-  },
-  titleSection: {
-    marginBottom: 4,
-  },
-  pageTitle: {
-    fontSize: 20,
-    fontWeight: "800",
-    color: "#0B1F3A",
-    letterSpacing: -0.2,
-  },
-  pageSubtitle: {
-    fontSize: 12.5,
-    color: "#64748B",
-    marginTop: 4,
-    lineHeight: 18,
-    fontWeight: "400",
-  },
-  bottomBar: {
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    right: 0,
-    backgroundColor: "#FFFFFF",
-    paddingHorizontal: 16,
-    paddingTop: 10,
-    borderTopWidth: 1,
-    borderTopColor: "#F1F5F9",
-    gap: 8,
-    ...Platform.select({
-      ios: {
-        shadowColor: "#0B1F3A",
-        shadowOffset: { width: 0, height: -3 },
-        shadowOpacity: 0.05,
-        shadowRadius: 6,
-      },
-      android: {
-        elevation: 6,
-      },
-      default: {},
-    }),
-  },
-  backActionButton: {
-    height: 48,
-    borderRadius: 14,
-    borderWidth: 1.5,
-    borderColor: "#E5E7EB",
-    backgroundColor: "#FFFFFF",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  backActionText: {
-    fontSize: 15,
-    fontWeight: "700",
-    color: "#0B1F3A",
-  },
-  confirmButton: {
-    height: 50,
-    borderRadius: 14,
-    backgroundColor: "#F97316",
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    gap: 8,
-    ...Platform.select({
-      ios: {
-        shadowColor: "#F97316",
-        shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 0.25,
-        shadowRadius: 8,
-      },
-      android: {
-        elevation: 3,
-      },
-      default: {},
-    }),
-  },
-  confirmButtonText: {
-    color: "#FFFFFF",
-    fontSize: 15.5,
-    fontWeight: "700",
-    letterSpacing: 0.2,
-  },
-  securityRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: 6,
-    backgroundColor: "#F0F5FA",
-    borderRadius: 10,
-    paddingVertical: 7,
-    paddingHorizontal: 10,
-    marginTop: 2,
-  },
-  securityText: {
-    fontSize: 11.5,
-    color: "#0B1F3A",
-    fontWeight: "500",
-  },
-});
 
 export default TdsRefundEstimateScreen;

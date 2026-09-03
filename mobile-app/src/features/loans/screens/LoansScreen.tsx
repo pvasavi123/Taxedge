@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet } from "react-native";
+import { View } from "react-native";
 import { useRouter } from "expo-router";
 import { ServiceHeader } from "../../../shared/components/ServiceHeader";
 import { ServiceList } from "../../../shared/components/ServiceList";
-import { BrandColors } from "../../../shared/theme";
 import { loansService } from "../services/LoansService";
 import { LoanServiceItem } from "../types/loans.types";
+import { styles } from "./LoansScreen.styles";
 
 export const LoansScreen: React.FC = () => {
   const router = useRouter();
@@ -33,12 +33,5 @@ export const LoansScreen: React.FC = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: BrandColors.BACKGROUND,
-  },
-});
 
 export default LoansScreen;

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {
   View,
   Text,
-  StyleSheet,
   TextInput,
   TouchableOpacity,
   ScrollView,
@@ -17,6 +16,7 @@ import { RevisedItrHeader } from "../components/common/RevisedItrHeader";
 import { RevisionReasonCard } from "../components/reason/RevisionReasonCard";
 import { REVISION_REASONS } from "../mock/revisedItrData";
 import { RevisionReasonId } from "../types/revisedItr.types";
+import { styles } from "./RevisionReasonScreen.styles";
 
 export const RevisionReasonScreen: React.FC = () => {
   const router = useRouter();
@@ -152,143 +152,5 @@ export const RevisionReasonScreen: React.FC = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#F8FAFC",
-  },
-  scrollContent: {
-    paddingHorizontal: 16,
-    paddingTop: 16,
-  },
-  titleSection: {
-    marginBottom: 16,
-  },
-  pageTitle: {
-    fontSize: 20,
-    fontWeight: "800",
-    color: "#0B1F3A",
-    letterSpacing: -0.2,
-  },
-  pageSubtitle: {
-    fontSize: 12.5,
-    color: "#64748B",
-    marginTop: 4,
-    lineHeight: 18,
-    fontWeight: "400",
-  },
-  otherInputGroup: {
-    marginBottom: 16,
-  },
-  otherInputLabel: {
-    fontSize: 13,
-    fontWeight: "700",
-    color: "#0B1F3A",
-    marginBottom: 6,
-  },
-  requiredStar: {
-    color: "#DC2626",
-  },
-  otherTextInput: {
-    minHeight: 80,
-    backgroundColor: "#FFFFFF",
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: "#E2E8F0",
-    padding: 12,
-    fontSize: 13.5,
-    color: "#0B1F3A",
-    textAlignVertical: "top",
-  },
-  inputError: {
-    borderColor: "#DC2626",
-  },
-  errorText: {
-    fontSize: 11.5,
-    color: "#DC2626",
-    marginTop: 4,
-    fontWeight: "500",
-  },
-  infoCard: {
-    backgroundColor: "#EFF6FF",
-    borderRadius: 14,
-    borderWidth: 1,
-    borderColor: "#DBEAFE",
-    padding: 12,
-    flexDirection: "row",
-    alignItems: "center",
-    marginTop: 4,
-    marginBottom: 16,
-  },
-  infoIconCircle: {
-    width: 26,
-    height: 26,
-    borderRadius: 13,
-    backgroundColor: "#2563EB",
-    justifyContent: "center",
-    alignItems: "center",
-    marginRight: 10,
-  },
-  infoText: {
-    flex: 1,
-    fontSize: 11.5,
-    color: "#475569",
-    lineHeight: 16,
-    fontWeight: "400",
-  },
-  boldText: {
-    fontWeight: "700",
-    color: "#0B1F3A",
-  },
-  bottomBar: {
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    right: 0,
-    backgroundColor: "#FFFFFF",
-    paddingHorizontal: 16,
-    paddingTop: 10,
-    borderTopWidth: 1,
-    borderTopColor: "#F1F5F9",
-    ...Platform.select({
-      ios: {
-        shadowColor: "#0B1F3A",
-        shadowOffset: { width: 0, height: -3 },
-        shadowOpacity: 0.04,
-        shadowRadius: 6,
-      },
-      android: {
-        elevation: 6,
-      },
-      default: {},
-    }),
-  },
-  continueButton: {
-    height: 52,
-    borderRadius: 16,
-    backgroundColor: "#F97316",
-    justifyContent: "center",
-    alignItems: "center",
-    ...Platform.select({
-      ios: {
-        shadowColor: "#F97316",
-        shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 0.25,
-        shadowRadius: 8,
-      },
-      android: {
-        elevation: 3,
-      },
-      default: {},
-    }),
-  },
-  continueButtonText: {
-    color: "#FFFFFF",
-    fontSize: 16,
-    fontWeight: "700",
-    letterSpacing: 0.2,
-  },
-});
 
 export default RevisionReasonScreen;

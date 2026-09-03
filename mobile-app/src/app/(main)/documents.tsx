@@ -1,16 +1,17 @@
 import React, { useState } from "react";
-import { View, StyleSheet, ScrollView } from "react-native";
+import { View, ScrollView } from "react-native";
 import {
   ScreenLayout,
   SCREEN_BOTTOM_PADDING,
-  SCREEN_PADDING,
 } from "../../components/ScreenLayout";
+import { Spacing } from "../../shared/theme";
 import {
   useDocumentVaultStore,
   CATEGORY_DEFINITIONS,
   MainVaultView,
   DocumentUploadView,
 } from "../../features/documents";
+import { styles } from "../../styles/app/(main)/documents.styles";
 
 export default function DocumentsScreen() {
   // viewMode: "VAULT" (1st image) | "UPLOAD" (2nd image)
@@ -61,7 +62,7 @@ export default function DocumentsScreen() {
       <ScrollView
         contentContainerStyle={[
           styles.scrollContent,
-          { paddingBottom: SCREEN_BOTTOM_PADDING + 16 },
+          { paddingBottom: SCREEN_BOTTOM_PADDING + Spacing.base },
         ]}
         showsVerticalScrollIndicator={false}
         keyboardShouldPersistTaps="handled"
@@ -93,15 +94,3 @@ export default function DocumentsScreen() {
   );
 }
 
-const styles = StyleSheet.create({
-  scrollContent: {
-    paddingHorizontal: SCREEN_PADDING,
-    paddingTop: 12,
-  },
-  responsiveContainer: {
-    width: "100%",
-    maxWidth: 640,
-    alignSelf: "center",
-    gap: 14,
-  },
-});

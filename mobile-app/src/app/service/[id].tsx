@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert } from "react-native";
+import { View, Text, ScrollView, TouchableOpacity, Alert } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useTheme } from "../../hooks/use-theme";
+import { Spacing } from "../../shared/theme";
 import { getServiceById } from "../../data/services";
 import { useApplicationStore } from "../../store/applicationStore";
 import { useNotificationStore } from "../../store/notificationStore";
@@ -10,6 +11,7 @@ import { DynamicForm } from "../../components/DynamicForm";
 import { PrimaryButton } from "../../components/PrimaryButton";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { styles } from "../../styles/app/service/[id].styles";
 import type { ApplicationFormData, NotificationType } from "../../types/domain";
 
 type ServiceTab = "Overview" | "Documents" | "Benefits";
@@ -217,7 +219,7 @@ export default function ServiceDetailScreen() {
       </ScrollView>
 
       {/* Start Application Sticky Bottom Button */}
-      <View style={[styles.bottomButtonContainer, { backgroundColor: colors.backgroundElement, borderTopColor: colors.border, paddingBottom: Math.max(insets.bottom, 12) }]}>
+      <View style={[styles.bottomButtonContainer, { backgroundColor: colors.backgroundElement, borderTopColor: colors.border, paddingBottom: Math.max(insets.bottom, Spacing.md) }]}>
         <PrimaryButton
           title="Start Application"
           onPress={() => setShowForm(true)}
@@ -228,157 +230,3 @@ export default function ServiceDetailScreen() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  scrollContent: {
-    padding: 16,
-    gap: 16,
-    paddingBottom: 90, // space for sticky button
-  },
-  detailHero: {
-    borderRadius: 16,
-    borderWidth: 1.5,
-    padding: 20,
-  },
-  heroRow: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  iconBg: {
-    width: 52,
-    height: 52,
-    borderRadius: 12,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  heroTextContainer: {
-    marginLeft: 14,
-    flex: 1,
-  },
-  heroTitle: {
-    fontSize: 18,
-    fontWeight: "700",
-  },
-  heroCategory: {
-    fontSize: 11,
-    fontWeight: "800",
-    textTransform: "uppercase",
-    marginTop: 2,
-  },
-  heroDesc: {
-    fontSize: 13,
-    lineHeight: 20,
-    marginTop: 12,
-    fontWeight: "500",
-  },
-  tabBar: {
-    flexDirection: "row",
-    borderBottomWidth: 1.5,
-    marginTop: 8,
-  },
-  tabItem: {
-    flex: 1,
-    paddingVertical: 12,
-    alignItems: "center",
-    borderBottomWidth: 3,
-    borderBottomColor: "transparent",
-  },
-  tabText: {
-    fontSize: 14,
-  },
-  card: {
-    borderRadius: 16,
-    borderWidth: 1.5,
-    padding: 20,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.03,
-    shadowRadius: 4,
-    elevation: 2,
-  },
-  cardSectionTitle: {
-    fontSize: 15,
-    fontWeight: "700",
-    marginBottom: 6,
-  },
-  cardSectionSub: {
-    fontSize: 12,
-    lineHeight: 18,
-    marginBottom: 16,
-  },
-  checklist: {
-    gap: 10,
-  },
-  checkRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 10,
-  },
-  checklistText: {
-    fontSize: 14,
-    fontWeight: "600",
-  },
-  overviewContentText: {
-    fontSize: 13,
-    lineHeight: 20,
-    fontWeight: "500",
-  },
-  bottomButtonContainer: {
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    right: 0,
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    borderTopWidth: 1.5,
-  },
-  formWizardHeader: {
-    height: 56,
-    flexDirection: "row",
-    alignItems: "center",
-    paddingHorizontal: 16,
-  },
-  backButton: {
-    padding: 4,
-  },
-  formWizardTitle: {
-    color: "#FFFFFF",
-    fontSize: 16,
-    fontWeight: "700",
-    marginLeft: 16,
-  },
-  progressBarContainer: {
-    height: 4,
-    backgroundColor: "#00000008",
-    width: "100%",
-  },
-  progressBarFill: {
-    height: "100%",
-    width: "50%", // Step 1 of 2 completed visual style
-  },
-  formSectionTitle: {
-    fontSize: 16,
-    fontWeight: "700",
-    marginBottom: 4,
-  },
-  formSectionSub: {
-    fontSize: 12,
-    marginBottom: 20,
-  },
-  errorContainer: {
-    flex: 1,
-  },
-  errorContent: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 24,
-  },
-  errorText: {
-    fontSize: 15,
-    fontWeight: "600",
-    marginTop: 12,
-  },
-});

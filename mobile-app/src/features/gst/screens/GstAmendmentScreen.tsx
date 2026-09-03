@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {
   View,
   Text,
-  StyleSheet,
   ScrollView,
   TouchableOpacity,
   TextInput,
@@ -18,6 +17,7 @@ import { GstSelectModal } from "../components/common/GstSelectModal";
 import { GstFileUploadField } from "../components/common/GstFileUploadField";
 import { GstSuccessAnimationScreen } from "../components/common/GstSuccessAnimationScreen";
 import { GstValidators } from "../utils/gstValidators";
+import { styles } from "./GstAmendmentScreen.styles";
 
 const AMENDMENT_FIELDS = [
   "Business Name",
@@ -234,93 +234,4 @@ export default function GstAmendmentScreen() {
   );
 }
 
-const styles = StyleSheet.create({
-  root: { flex: 1, backgroundColor: "#FFFFFF" },
-  headerBar: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    paddingHorizontal: 16,
-    paddingBottom: 12,
-    backgroundColor: "#FFFFFF",
-  },
-  backButton: {
-    width: 38,
-    height: 38,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  headerTitle: {
-    fontSize: 18,
-    fontWeight: "700",
-    color: BrandColors.TEXT_PRIMARY,
-    fontFamily: Platform.select({ ios: "System", android: "sans-serif-medium" }),
-  },
-  placeholderBox: { width: 38 },
-  scrollView: { flex: 1 },
-  scrollContent: { padding: 16, paddingBottom: 240, gap: 14, flexGrow: 1 },
-  fieldGroup: { gap: 6 },
-  label: { fontSize: 13, fontWeight: "600", color: BrandColors.TEXT_PRIMARY },
-  star: { color: "#EF4444" },
-  input: {
-    height: 48,
-    backgroundColor: "#F8FAFC",
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: "#E2E8F0",
-    paddingHorizontal: 14,
-    fontSize: 14,
-    color: BrandColors.TEXT_PRIMARY,
-  },
-  readOnlyInput: {
-    backgroundColor: "#F1F5F9",
-    color: "#475569",
-    fontWeight: "600",
-  },
-  textArea: {
-    minHeight: 88,
-    backgroundColor: "#FFFFFF",
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: "#E2E8F0",
-    padding: 12,
-    fontSize: 13.5,
-    color: BrandColors.TEXT_PRIMARY,
-    textAlignVertical: "top",
-  },
-  counterRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  charCount: { fontSize: 11, color: "#94A3B8" },
-  selectBox: {
-    height: 48,
-    backgroundColor: "#FFFFFF",
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: "#E2E8F0",
-    paddingHorizontal: 14,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  selectText: { fontSize: 14, fontWeight: "600", color: BrandColors.TEXT_PRIMARY },
-  placeholderText: { color: "#94A3B8", fontWeight: "400" },
-  inputError: { borderColor: "#EF4444", backgroundColor: "#FEF2F2" },
-  errorText: { fontSize: 11.5, color: "#DC2626", fontWeight: "500" },
-  actionOrangeBtn: {
-    height: 52,
-    borderRadius: 26,
-    backgroundColor: BrandColors.PRIMARY_ORANGE,
-    justifyContent: "center",
-    alignItems: "center",
-    shadowColor: BrandColors.PRIMARY_ORANGE,
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.25,
-    shadowRadius: 8,
-    elevation: 3,
-    marginTop: 8,
-  },
-  actionOrangeBtnText: { fontSize: 15, fontWeight: "700", color: "#FFFFFF" },
-});
+

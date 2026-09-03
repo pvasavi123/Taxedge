@@ -87,6 +87,15 @@ export const BorderRadius = {
   full: 9999,
 };
 
+export const BorderWidth = {
+  hairline: 0.5,
+  thin: 1,
+  base: 1.4,
+  regular: 1.5,
+  medium: 1.8,
+  thick: 2,
+};
+
 export const Shadows = {
   sm: Platform.select({
     ios: {

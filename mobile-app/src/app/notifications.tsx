@@ -1,18 +1,20 @@
 import React, { useEffect } from "react";
-import { View, Text, StyleSheet, FlatList } from "react-native";
+import { View, Text, FlatList } from "react-native";
 import { useRouter } from "expo-router";
 import { useTheme } from "../hooks/use-theme";
+import { Spacing } from "../shared/theme";
 import { useNotificationStore } from "../store/notificationStore";
 import { AppHeader } from "../components/AppHeader";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { styles } from "../styles/app/notifications.styles";
 import type { IconName, NotificationType } from "../types/domain";
 
 export default function NotificationsScreen() {
   const colors = useTheme();
   const router = useRouter();
   const insets = useSafeAreaInsets();
-  const { notifications, markAllAsRead, markAsRead } = useNotificationStore();
+  const { notifications, markAllAsRead } = useNotificationStore();
 
   // Automatically mark all notifications as read when the screen is opened
   useEffect(() => {
@@ -47,7 +49,7 @@ export default function NotificationsScreen() {
       <FlatList
         data={notifications}
         keyExtractor={(item) => item.id}
-        contentContainerStyle={[styles.listContent, { paddingBottom: insets.bottom + 24 }]}
+        contentContainerStyle={[styles.listContent, { paddingBottom: insets.bottom + Spacing.xl }]}
         showsVerticalScrollIndicator={false}
         ListEmptyComponent={
           <View style={styles.emptyContainer}>
@@ -78,7 +80,10 @@ export default function NotificationsScreen() {
               ]}
             >
               <View
-                style={[styles.iconBg, { backgroundColor: icon.color + "12" }]}
+                style={[
+                  styles.iconBg,
+                  { backgroundColor: colors.backgroundSelected },
+                ]}
               >
                 <Ionicons name={icon.name} size={20} color={icon.color} />
               </View>
@@ -88,7 +93,10 @@ export default function NotificationsScreen() {
                     {item.title}
                   </Text>
                   <Text
-                    style={[styles.notifTime, { color: colors.textSecondary }]}
+                    style={[
+                      styles.notifTime,
+                      { color: colors.textSecondary },
+                    ]}
                   >
                     {item.timestamp}
                   </Text>
@@ -106,65 +114,3 @@ export default function NotificationsScreen() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  listContent: {
-    padding: 16,
-    gap: 12,
-    paddingBottom: 32,
-  },
-  notifCard: {
-    borderRadius: 12,
-    borderWidth: 1.5,
-    padding: 16,
-    flexDirection: "row",
-    alignItems: "flex-start",
-  },
-  iconBg: {
-    width: 38,
-    height: 38,
-    borderRadius: 19,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  notifContent: {
-    flex: 1,
-    marginLeft: 12,
-  },
-  notifHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "flex-start",
-  },
-  notifTitle: {
-    fontSize: 14,
-    fontWeight: "700",
-    flex: 1,
-    marginRight: 8,
-  },
-  notifTime: {
-    fontSize: 10,
-    fontWeight: "500",
-  },
-  notifBody: {
-    fontSize: 12,
-    marginTop: 4,
-    lineHeight: 18,
-  },
-  emptyContainer: {
-    alignItems: "center",
-    justifyContent: "center",
-    paddingVertical: 100,
-  },
-  emptyText: {
-    fontSize: 16,
-    fontWeight: "700",
-  },
-  emptySub: {
-    fontSize: 13,
-    marginTop: 6,
-  },
-});

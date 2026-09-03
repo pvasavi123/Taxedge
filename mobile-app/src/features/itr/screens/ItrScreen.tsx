@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet } from "react-native";
+import { View } from "react-native";
 import { useRouter } from "expo-router";
 import { ServiceHeader } from "../../../shared/components/ServiceHeader";
 import { ServiceList } from "../../../shared/components/ServiceList";
-import { BrandColors } from "../../../shared/theme";
 import { itrService } from "../services/ItrService";
 import { ItrServiceItem } from "../types/itr.types";
+import { styles } from "./ItrScreen.styles";
 
 export const ItrScreen: React.FC = () => {
   const router = useRouter();
@@ -33,12 +33,5 @@ export const ItrScreen: React.FC = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: BrandColors.BACKGROUND,
-  },
-});
 
 export default ItrScreen;

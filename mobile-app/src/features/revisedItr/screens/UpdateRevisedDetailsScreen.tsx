@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {
   View,
   Text,
-  StyleSheet,
   ScrollView,
   TouchableOpacity,
   StatusBar,
@@ -14,6 +13,7 @@ import { RevisedItrHeader } from "../components/common/RevisedItrHeader";
 import { RevisedFormField } from "../components/update/RevisedFormField";
 import { DEFAULT_REVISED_FORM_FIELDS } from "../mock/revisedItrData";
 import { RevisedFormFields } from "../types/revisedItr.types";
+import { styles } from "./UpdateRevisedDetailsScreen.styles";
 
 export const UpdateRevisedDetailsScreen: React.FC = () => {
   const router = useRouter();
@@ -200,80 +200,5 @@ export const UpdateRevisedDetailsScreen: React.FC = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#F8FAFC",
-  },
-  scrollContent: {
-    paddingHorizontal: 16,
-    paddingTop: 16,
-  },
-  titleSection: {
-    marginBottom: 16,
-  },
-  pageTitle: {
-    fontSize: 20,
-    fontWeight: "800",
-    color: "#0B1F3A",
-    letterSpacing: -0.2,
-  },
-  pageSubtitle: {
-    fontSize: 12.5,
-    color: "#64748B",
-    marginTop: 4,
-    lineHeight: 18,
-    fontWeight: "400",
-  },
-  bottomBar: {
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    right: 0,
-    backgroundColor: "#FFFFFF",
-    paddingHorizontal: 16,
-    paddingTop: 10,
-    borderTopWidth: 1,
-    borderTopColor: "#F1F5F9",
-    ...Platform.select({
-      ios: {
-        shadowColor: "#0B1F3A",
-        shadowOffset: { width: 0, height: -3 },
-        shadowOpacity: 0.04,
-        shadowRadius: 6,
-      },
-      android: {
-        elevation: 6,
-      },
-      default: {},
-    }),
-  },
-  continueButton: {
-    height: 52,
-    borderRadius: 16,
-    backgroundColor: "#F97316",
-    justifyContent: "center",
-    alignItems: "center",
-    ...Platform.select({
-      ios: {
-        shadowColor: "#F97316",
-        shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 0.25,
-        shadowRadius: 8,
-      },
-      android: {
-        elevation: 3,
-      },
-      default: {},
-    }),
-  },
-  continueButtonText: {
-    color: "#FFFFFF",
-    fontSize: 16,
-    fontWeight: "700",
-    letterSpacing: 0.2,
-  },
-});
 
 export default UpdateRevisedDetailsScreen;

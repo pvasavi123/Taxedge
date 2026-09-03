@@ -138,11 +138,20 @@ export function FloatingTabBar({
     >
       <View style={styles.capsuleContainer}>
         {state.routes.map((route, index) => {
+          // Skip routes with null href, hidden routes, and any style files or undeclared routes
+          if (
+            route.name.includes("styles") ||
+            route.name.endsWith(".styles") ||
+            HIDDEN_FROM_BAR.has(route.name.split("/")[0]) ||
+            (!TAB_META[route.name] && !TAB_META[route.name.split("/")[0]])
+          ) {
+            return null;
+          }
+
           const options = descriptors[route.key].options as
             BottomTabNavigationOptions & { href?: Href | null };
 
           if (options.href === null) return null;
-          if (HIDDEN_FROM_BAR.has(route.name.split("/")[0])) return null;
 
           const meta = metaFor(route.name);
           const isFocused = state.index === index;

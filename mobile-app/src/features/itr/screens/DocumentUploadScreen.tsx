@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {
   View,
   Text,
-  StyleSheet,
   ScrollView,
   TouchableOpacity,
   StatusBar,
@@ -13,11 +12,13 @@ import { useRouter, useLocalSearchParams } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import * as DocumentPicker from "expo-document-picker";
+import { Spacing } from "../../../shared/theme";
 import { BUSINESS_REQUIRED_DOCUMENTS } from "../mock/businessDocumentsData";
 import { BusinessDocumentItem } from "../types/documentUpload.types";
 import { UploadInstructionCard } from "../components/documents/UploadInstructionCard";
 import { DocumentUploadCard } from "../components/documents/DocumentUploadCard";
 import { MissingDocumentsBottomSheet } from "../components/documents/MissingDocumentsBottomSheet";
+import { styles } from "./DocumentUploadScreen.styles";
 
 interface DocumentUploadScreenProps {
   onContinue?: (documents: BusinessDocumentItem[]) => void;
@@ -219,7 +220,7 @@ export const DocumentUploadScreen: React.FC<DocumentUploadScreenProps> = ({
       <View
         style={[
           styles.bottomBar,
-          { paddingBottom: Math.max(insets.bottom, 12) },
+          { paddingBottom: Math.max(insets.bottom, Spacing.md) },
         ]}
       >
         <TouchableOpacity
@@ -260,192 +261,5 @@ export const DocumentUploadScreen: React.FC<DocumentUploadScreenProps> = ({
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#F8F9FB",
-  },
-  header: {
-    minHeight: 58,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    paddingHorizontal: 16,
-    paddingVertical: 6,
-    backgroundColor: "#FFFFFF",
-    borderBottomWidth: 1,
-    borderBottomColor: "#F1F5F9",
-  },
-  backButton: {
-    width: 38,
-    height: 38,
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: "#E5E7EB",
-    backgroundColor: "#FFFFFF",
-    justifyContent: "center",
-    alignItems: "center",
-    ...Platform.select({
-      ios: {
-        shadowColor: "#0B1F3A",
-        shadowOffset: { width: 0, height: 1 },
-        shadowOpacity: 0.05,
-        shadowRadius: 2,
-      },
-      android: {
-        elevation: 1,
-      },
-      default: {},
-    }),
-  },
-  headerTitleGroup: {
-    alignItems: "center",
-    justifyContent: "center",
-    flex: 1,
-  },
-  headerTitle: {
-    fontSize: 18,
-    fontWeight: "700",
-    color: "#0B1F3A",
-    letterSpacing: -0.2,
-  },
-  headerSubtitle: {
-    fontSize: 12.5,
-    fontWeight: "500",
-    color: "#0B1F3A",
-    marginTop: 2,
-  },
-  headerRightSpacer: {
-    width: 38,
-  },
-  progressContainer: {
-    paddingHorizontal: 16,
-    paddingVertical: 14,
-    backgroundColor: "#FFFFFF",
-    borderBottomWidth: 1,
-    borderBottomColor: "#F1F5F9",
-  },
-  progressTopRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    marginBottom: 8,
-  },
-  progressCountText: {
-    fontSize: 13.5,
-    fontWeight: "700",
-    color: "#0B1F3A",
-  },
-  inProgressBar: {
-    borderWidth: 1,
-    borderColor: "#F97316",
-    backgroundColor: "#FFF7ED",
-    borderRadius: 20,
-    paddingHorizontal: 10,
-    paddingVertical: 3,
-  },
-  inProgressText: {
-    fontSize: 11,
-    fontWeight: "700",
-    color: "#F97316",
-  },
-  progressBottomRow: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  progressPercentageText: {
-    fontSize: 13,
-    fontWeight: "800",
-    color: "#F97316",
-    width: 38,
-  },
-  progressTrack: {
-    flex: 1,
-    height: 6,
-    backgroundColor: "#E5E7EB",
-    borderRadius: 3,
-    overflow: "hidden",
-  },
-  progressFill: {
-    height: "100%",
-    backgroundColor: "#F97316",
-    borderRadius: 3,
-  },
-  scrollContent: {
-    paddingHorizontal: 16,
-    paddingTop: 16,
-  },
-  bottomBar: {
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    right: 0,
-    backgroundColor: "#FFFFFF",
-    paddingHorizontal: 16,
-    paddingTop: 12,
-    borderTopWidth: 1,
-    borderTopColor: "#F1F5F9",
-    ...Platform.select({
-      ios: {
-        shadowColor: "#0B1F3A",
-        shadowOffset: { width: 0, height: -3 },
-        shadowOpacity: 0.05,
-        shadowRadius: 6,
-      },
-      android: {
-        elevation: 6,
-      },
-      default: {},
-    }),
-  },
-  continueButton: {
-    height: 52,
-    borderRadius: 14,
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    gap: 8,
-  },
-  continueActive: {
-    backgroundColor: "#F97316",
-    ...Platform.select({
-      ios: {
-        shadowColor: "#F97316",
-        shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 0.25,
-        shadowRadius: 8,
-      },
-      android: {
-        elevation: 3,
-      },
-      default: {},
-    }),
-  },
-  continueDisabled: {
-    backgroundColor: "#FDBA74",
-    opacity: 0.9,
-  },
-  continueButtonText: {
-    color: "#FFFFFF",
-    fontSize: 16,
-    fontWeight: "700",
-    letterSpacing: 0.2,
-  },
-  buttonIcon: {
-    marginLeft: 2,
-  },
-  lockHintRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: 5,
-    marginTop: 8,
-  },
-  lockHintText: {
-    fontSize: 12,
-    color: "#64748B",
-    fontWeight: "500",
-  },
-});
-
 export default DocumentUploadScreen;
+

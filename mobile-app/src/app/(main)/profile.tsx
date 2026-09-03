@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {
   View,
   Text,
-  StyleSheet,
   ScrollView,
   TouchableOpacity,
   Alert,
@@ -20,6 +19,7 @@ import { useAuthStore } from "../../store/authStore";
 import { useApplicationStore } from "../../store/applicationStore";
 
 import { ScreenLayout, SCREEN_BOTTOM_PADDING } from "../../components/ScreenLayout";
+import { styles } from "../../styles/app/(main)/profile.styles";
  
 import { SecondaryButton } from "../../components/SecondaryButton";
 import type { IconName } from "../../types/domain";
@@ -458,10 +458,10 @@ export default function ProfileScreen() {
                     onPress={() => runAction(row)}
                     style={[
                       styles.row,
-                      index > 0 && {
-                        borderTopWidth: StyleSheet.hairlineWidth,
-                        borderTopColor: colors.border,
-                      },
+                      index > 0 && [
+                        styles.rowBorderTop,
+                        { borderTopColor: colors.border },
+                      ],
                     ]}
                   >
                     <View
@@ -606,215 +606,3 @@ export default function ProfileScreen() {
   );
 }
 
-const styles = StyleSheet.create({
-  /* Hero */
-  hero: {
-    alignItems: "center",
-    paddingTop: 22,
-    paddingBottom: 42,
-    paddingHorizontal: 20,
-  },
-  avatarWrap: {
-    width: 88,
-    height: 88,
-  },
-  avatarBg: {
-    width: 88,
-    height: 88,
-    borderRadius: 44,
-    backgroundColor: "rgba(255,255,255,0.16)",
-    borderWidth: 2,
-    borderColor: "rgba(255,255,255,0.4)",
-    justifyContent: "center",
-    alignItems: "center",
-    overflow: "hidden",
-  },
-  avatarImage: {
-    width: "100%",
-    height: "100%",
-  },
-  avatarLoading: {
-    ...StyleSheet.absoluteFill,
-    backgroundColor: "rgba(0,0,0,0.35)",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  editBadge: {
-    position: "absolute",
-    right: -2,
-    bottom: -2,
-    width: 26,
-    height: 26,
-    borderRadius: 13,
-    justifyContent: "center",
-    alignItems: "center",
-    borderWidth: 2,
-    borderColor: "#FFFFFF",
-  },
-  heroName: {
-    color: "#FFFFFF",
-    fontSize: 20,
-    fontWeight: "800",
-    marginTop: 14,
-  },
-  heroId: {
-    color: "#C3D5EA",
-    fontSize: 12.5,
-    fontWeight: "500",
-    marginTop: 4,
-  },
-  pillRow: {
-    flexDirection: "row",
-    gap: 10,
-    marginTop: 14,
-  },
-  pill: {
-    backgroundColor: "rgba(255,255,255,0.18)",
-    borderRadius: 14,
-    paddingHorizontal: 14,
-    paddingVertical: 6,
-  },
-  pillOutline: {
-    backgroundColor: "transparent",
-    borderWidth: 1,
-  },
-  pillText: {
-    color: "#FFFFFF",
-    fontSize: 12,
-    fontWeight: "700",
-  },
-
-  /* Stats */
-  statsCard: {
-    flexDirection: "row",
-    marginHorizontal: 16,
-    marginTop: -26,
-    borderRadius: 16,
-    borderWidth: 1,
-    paddingVertical: 16,
-    shadowColor: "#04203F",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.08,
-    shadowRadius: 10,
-    elevation: 4,
-  },
-  statCell: {
-    flex: 1,
-    alignItems: "center",
-  },
-  statValue: {
-    fontSize: 19,
-    fontWeight: "800",
-  },
-  statLabel: {
-    fontSize: 11.5,
-    fontWeight: "600",
-    marginTop: 3,
-  },
-
-  /* Menu */
-  menuArea: {
-    paddingHorizontal: 16,
-    paddingTop: 18,
-    gap: 6,
-  },
-  sectionLabel: {
-    fontSize: 11,
-    fontWeight: "700",
-    letterSpacing: 0.8,
-    marginTop: 12,
-    marginBottom: 8,
-    marginLeft: 4,
-  },
-  sectionCard: {
-    borderRadius: 14,
-    borderWidth: 1,
-    overflow: "hidden",
-  },
-  row: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 12,
-    paddingHorizontal: 14,
-    paddingVertical: 13,
-  },
-  rowIcon: {
-    width: 34,
-    height: 34,
-    borderRadius: 10,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  rowLabel: {
-    flex: 1,
-    fontSize: 14,
-    fontWeight: "600",
-  },
-
-  logoutBtn: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: 8,
-    height: 50,
-    borderRadius: 14,
-    borderWidth: 1.5,
-    marginTop: 20,
-  },
-  logoutText: {
-    fontSize: 15,
-    fontWeight: "700",
-  },
-
-  /* Modals */
-  modalOverlay: {
-    flex: 1,
-    backgroundColor: "rgba(5,39,80,0.45)",
-    justifyContent: "center",
-    padding: 24,
-  },
-  modalContainer: {
-    borderRadius: 18,
-    padding: 20,
-  },
-  modalTitle: {
-    fontSize: 17,
-    fontWeight: "800",
-    marginBottom: 6,
-  },
-  modalBody: {
-    paddingVertical: 8,
-  },
-  modalNote: {
-    fontSize: 11.5,
-    fontWeight: "500",
-    lineHeight: 17,
-    marginBottom: 14,
-  },
-  infoRow: {
-    flexDirection: "row",
-    alignItems: "flex-start",
-    justifyContent: "space-between",
-    gap: 16,
-    paddingVertical: 9,
-  },
-  infoKey: {
-    fontSize: 13,
-    fontWeight: "500",
-  },
-  infoValue: {
-    flex: 1,
-    fontSize: 13,
-    fontWeight: "700",
-    textAlign: "right",
-  },
-  statusLabelContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 5,
-  },
-  statusLabelText: {
-    fontSize: 12,
-    fontWeight: "800",
-  },
-});

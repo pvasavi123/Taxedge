@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import {
   View,
   Text,
-  StyleSheet,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
@@ -14,8 +13,10 @@ import { useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useTheme } from "../../hooks/use-theme";
+import { BrandColors, BorderWidth, Spacing } from "../../shared/theme";
 import { useAuthStore } from "../../store/authStore";
 import { PrimaryButton } from "../../components/PrimaryButton";
+import { styles } from "../../styles/app/(auth)/otp.styles";
 
 /**
  * Step one of signup: confirm the code sent to the mobile number. Entering the
@@ -77,10 +78,10 @@ export default function OTPScreen() {
               borderColor: error
                 ? colors.error
                 : isCurrent
-                  ? "#0F2E5C"
-                  : "#E8EDF3",
-              borderWidth: isCurrent ? 1.8 : 1.4,
-              backgroundColor: isCurrent ? "#FFFFFF" : "#F5F7FA",
+                  ? BrandColors.PRIMARY_BLUE_DARK
+                  : BrandColors.CARD_BORDER,
+              borderWidth: isCurrent ? BorderWidth.medium : BorderWidth.base,
+              backgroundColor: isCurrent ? BrandColors.WHITE : BrandColors.BACKGROUND,
             },
           ]}
         >
@@ -96,7 +97,7 @@ export default function OTPScreen() {
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={[styles.container, { backgroundColor: "#F5F7FA" }]}
+      style={[styles.container, { backgroundColor: BrandColors.BACKGROUND }]}
     >
       <ScrollView
         contentContainerStyle={styles.scrollContainer}
@@ -106,13 +107,13 @@ export default function OTPScreen() {
         <TouchableOpacity
           activeOpacity={0.8}
           onPress={() => router.back()}
-          style={[styles.backBtnAbsolute, { top: insets.top + 12 }]}
+          style={[styles.backBtnAbsolute, { top: insets.top + Spacing.md }]}
         >
-          <Ionicons name="arrow-back" size={20} color="#083B75" />
+          <Ionicons name="arrow-back" size={20} color={BrandColors.PRIMARY_BLUE} />
         </TouchableOpacity>
 
         <View style={styles.headerSection}>
-          <Text style={[styles.title, { color: "#083B75" }]}>
+          <Text style={[styles.title, { color: BrandColors.PRIMARY_BLUE }]}>
             Verification Code
           </Text>
           <Text style={[styles.subTitle, { color: colors.textSecondary }]}>
@@ -190,112 +191,3 @@ export default function OTPScreen() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  scrollContainer: {
-    flexGrow: 1,
-    justifyContent: "center",
-    padding: 24,
-  },
-  backBtnAbsolute: {
-    width: 40,
-    height: 40,
-    borderRadius: 14,
-    borderWidth: 1,
-    borderColor: "#E4E9F0",
-    justifyContent: "center",
-    alignItems: "center",
-    position: "absolute",
-    left: 24,
-    backgroundColor: "#FFFFFF",
-    shadowColor: "#083B75",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.05,
-    shadowRadius: 4,
-    elevation: 2,
-  },
-  headerSection: {
-    alignItems: "center",
-    marginBottom: 28,
-  },
-  title: {
-    fontSize: 28,
-    fontWeight: "800",
-    letterSpacing: 0.2,
-  },
-  subTitle: {
-    fontSize: 15,
-    textAlign: "center",
-    marginTop: 10,
-    lineHeight: 21,
-  },
-  card: {
-    borderRadius: 24,
-    borderWidth: 1,
-    borderColor: "#EDF1F6",
-    backgroundColor: "#FFFFFF",
-    paddingHorizontal: 22,
-    paddingVertical: 26,
-    shadowColor: "#083B75",
-    shadowOffset: { width: 0, height: 6 },
-    shadowOpacity: 0.07,
-    shadowRadius: 16,
-    elevation: 4,
-    position: "relative",
-  },
-  otpTouchable: {
-    width: "100%",
-  },
-  otpGrid: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginBottom: 24,
-    width: "100%",
-  },
-  otpBox: {
-    width: 46,
-    height: 56,
-    borderRadius: 14,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  otpBoxText: {
-    fontSize: 20,
-    fontWeight: "700",
-  },
-  hiddenInput: {
-    position: "absolute",
-    opacity: 0,
-    width: 1,
-    height: 1,
-  },
-  errorText: {
-    fontSize: 12,
-    marginTop: 4,
-    fontWeight: "500",
-  },
-  verifyBtn: {
-    marginTop: 4,
-    height: 58,
-    borderRadius: 14,
-    shadowColor: "#F97316",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.28,
-    shadowRadius: 10,
-    elevation: 4,
-  },
-  resendContainer: {
-    marginTop: 22,
-    alignItems: "center",
-  },
-  resendText: {
-    fontSize: 14.5,
-    fontWeight: "500",
-  },
-  resendLink: {
-    fontSize: 14,
-    fontWeight: "700",
-  },
-});

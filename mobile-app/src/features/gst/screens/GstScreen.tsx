@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet } from "react-native";
+import { View } from "react-native";
 import { useRouter } from "expo-router";
 import { ServiceHeader } from "../../../shared/components/ServiceHeader";
 import { ServiceList } from "../../../shared/components/ServiceList";
 import { gstService } from "../services/GstService";
 import { GstServiceItem } from "../types/gst.types";
+import { styles } from "./GstScreen.styles";
 
 export const GstScreen: React.FC = () => {
   const router = useRouter();
@@ -32,13 +33,6 @@ export const GstScreen: React.FC = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#F8FAFC",
-  },
-});
 
 export default GstScreen;
 

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {
   View,
   Text,
-  StyleSheet,
   TouchableOpacity,
   ScrollView,
   Platform,
@@ -21,6 +20,7 @@ import { GstDocumentChecklistStep } from "../components/GstDocumentChecklistStep
 import { GstDocumentUploadStep } from "../components/GstDocumentUploadStep";
 import { GstReviewStep } from "../components/GstReviewStep";
 import { GstApplicationStatusStep } from "../components/GstApplicationStatusStep";
+import { styles } from "./GstRegistrationScreen.styles";
 
 const STEPS = ["Personal", "Business", "Documents", "Review", "Submit"];
 
@@ -262,69 +262,5 @@ export const GstRegistrationScreen: React.FC = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  root: {
-    flex: 1,
-    backgroundColor: "#FFFFFF",
-  },
-  headerBar: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    paddingHorizontal: 16,
-    paddingBottom: 12,
-    backgroundColor: "#FFFFFF",
-  },
-  backButton: {
-    width: 38,
-    height: 38,
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: "#E2E8F0",
-    backgroundColor: "#FFFFFF",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  headerTitle: {
-    fontSize: 18,
-    fontWeight: "700",
-    color: BrandColors.TEXT_PRIMARY,
-    fontFamily: Platform.select({ ios: "System", android: "sans-serif-medium" }),
-  },
-  placeholderBox: {
-    width: 38,
-  },
-  scrollView: {
-    flex: 1,
-  },
-  scrollContent: {
-    paddingHorizontal: 18,
-    flexGrow: 1,
-    paddingBottom: 260,
-  },
-  buttonWrapper: {
-    marginTop: 22,
-    marginBottom: 8,
-  },
-  submitBtn: {
-    height: 50,
-    borderRadius: 25,
-    backgroundColor: BrandColors.PRIMARY_ORANGE,
-    justifyContent: "center",
-    alignItems: "center",
-    shadowColor: BrandColors.PRIMARY_ORANGE,
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.25,
-    shadowRadius: 8,
-    elevation: 3,
-  },
-  submitBtnText: {
-    fontSize: 15,
-    fontWeight: "700",
-    color: "#FFFFFF",
-    fontFamily: Platform.select({ ios: "System", android: "sans-serif-medium" }),
-  },
-});
 
 export default GstRegistrationScreen;

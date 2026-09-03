@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {
   View,
   Text,
-  StyleSheet,
   ScrollView,
   TouchableOpacity,
   Platform,
@@ -16,6 +15,7 @@ import { PROFESSION_OPTIONS } from "../mock/professionData";
 import { ProfessionHeaderCard } from "../components/ProfessionHeaderCard";
 import { ProfessionGrid } from "../components/ProfessionGrid";
 import { StartApplicationButton } from "../components/StartApplicationButton";
+import { styles } from "./ProfessionSelectionScreen.styles";
 
 interface ProfessionSelectionScreenProps {
   onContinue?: (selected: ProfessionOption) => void;
@@ -124,65 +124,5 @@ export const ProfessionSelectionScreen: React.FC<ProfessionSelectionScreenProps>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#F8FAFC",
-  },
-  header: {
-    height: 56,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    paddingHorizontal: 16,
-    backgroundColor: "#FFFFFF",
-    borderBottomWidth: 1,
-    borderBottomColor: "#F1F5F9",
-  },
-  backButton: {
-    width: 38,
-    height: 38,
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: "#E2E8F0",
-    backgroundColor: "#FFFFFF",
-    justifyContent: "center",
-    alignItems: "center",
-    ...Platform.select({
-      ios: {
-        shadowColor: "#0B1F3A",
-        shadowOffset: { width: 0, height: 1 },
-        shadowOpacity: 0.05,
-        shadowRadius: 2,
-      },
-      android: {
-        elevation: 1,
-      },
-      default: {},
-    }),
-  },
-  titleGroup: {
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  headerTitle: {
-    fontSize: 18,
-    fontWeight: "700",
-    color: "#0B1F3A",
-    letterSpacing: -0.2,
-  },
-  headerSubtitle: {
-    fontSize: 12,
-    fontWeight: "500",
-    color: "#64748B",
-    marginTop: 1,
-  },
-  headerRightSpacer: {
-    width: 38,
-  },
-  scrollContent: {
-    padding: 16,
-  },
-});
-
 export default ProfessionSelectionScreen;
+

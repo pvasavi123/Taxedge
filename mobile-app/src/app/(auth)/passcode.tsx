@@ -1,10 +1,16 @@
 import React, { useState, useEffect, useRef } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, TextInput, KeyboardAvoidingView, Platform, ScrollView, Image } from "react-native";
+import { View, Text, TouchableOpacity, TextInput, KeyboardAvoidingView, Platform, ScrollView, Image } from "react-native";
 import { useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { BrandColors, Colors, BorderWidth, Spacing } from "../../shared/theme";
 import { useAuthStore } from "../../store/authStore";
 import { PrimaryButton } from "../../components/PrimaryButton";
+import { styles } from "../../styles/app/(auth)/passcode.styles";
+
+const HEADER_OFFSET = Spacing.md;
+const FOOTER_OFFSET = Spacing.base;
+const MIN_SCROLL_PADDING = Spacing.xl + Spacing.xs;
 
 export default function PasscodeScreen() {
   const router = useRouter();
@@ -52,17 +58,17 @@ export default function PasscodeScreen() {
   };
 
   return (
-    <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={[s.container, { backgroundColor: "#F8FAFC" }]}>
-      <ScrollView contentContainerStyle={[s.scroll, { paddingTop: Math.max(insets.top + 12, 28), paddingBottom: Math.max(insets.bottom + 16, 28) }]} keyboardShouldPersistTaps="handled" showsVerticalScrollIndicator={false}>
-        <TouchableOpacity activeOpacity={0.7} onPress={() => router.back()} style={[s.backBtn, { top: insets.top + 12 }]}>
-          <Ionicons name="arrow-back" size={20} color="#083B75" />
+    <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={[styles.container, { backgroundColor: BrandColors.BACKGROUND }]}>
+      <ScrollView contentContainerStyle={[styles.scroll, { paddingTop: Math.max(insets.top + HEADER_OFFSET, MIN_SCROLL_PADDING), paddingBottom: Math.max(insets.bottom + FOOTER_OFFSET, MIN_SCROLL_PADDING) }]} keyboardShouldPersistTaps="handled" showsVerticalScrollIndicator={false}>
+        <TouchableOpacity activeOpacity={0.7} onPress={() => router.back()} style={[styles.backBtn, { top: insets.top + HEADER_OFFSET }]}>
+          <Ionicons name="arrow-back" size={20} color={BrandColors.PRIMARY_BLUE} />
         </TouchableOpacity>
 
-        <View style={s.wrapper}>
-          <View style={s.header}>
-            <Image source={require("../../../assets/images/icon.png")} style={s.logo} resizeMode="contain" />
-            <Text style={s.title}>Welcome Back 👋</Text>
-            <Text style={s.sub}>Enter your 6-digit passcode for{"\n"}<Text style={s.phoneHighlight}>{phone}</Text></Text>
+        <View style={styles.wrapper}>
+          <View style={styles.header}>
+            <Image source={require("../../../assets/images/icon.png")} style={styles.logo} resizeMode="contain" />
+            <Text style={styles.title}>Welcome Back 👋</Text>
+            <Text style={styles.sub}>Enter your 6-digit passcode for{"\n"}<Text style={styles.phoneHighlight}>{phone}</Text></Text>
           </View>
 
           {/* Hidden input receiving native mobile keypad input without auto-submitting */}
@@ -76,19 +82,19 @@ export default function PasscodeScreen() {
             }}
             keyboardType="number-pad"
             maxLength={6}
-            style={s.hiddenInput}
+            style={styles.hiddenInput}
             autoFocus
           />
 
           {/* Visual 6 Dots */}
-          <TouchableOpacity activeOpacity={1} onPress={() => inputRef.current?.focus()} style={s.dotsTouchable}>
-            <View style={s.dotsRow}>
+          <TouchableOpacity activeOpacity={1} onPress={() => inputRef.current?.focus()} style={styles.dotsTouchable}>
+            <View style={styles.dotsRow}>
               {Array.from({ length: 6 }).map((_, i) => {
                 const filled = i < passcode.length;
                 const current = i === passcode.length;
                 return (
-                  <View key={i} style={[s.dotBox, { borderColor: error ? "#DC2626" : filled || current ? "#083B75" : "#E2E8F0", backgroundColor: filled ? "#083B75" : "#FFFFFF", borderWidth: current ? 2 : 1.5 }]}>
-                    {filled ? <View style={s.innerDot} /> : current ? <View style={s.cursor} /> : null}
+                  <View key={i} style={[styles.dotBox, { borderColor: error ? Colors.error : filled || current ? BrandColors.PRIMARY_BLUE : BrandColors.BORDER, backgroundColor: filled ? BrandColors.PRIMARY_BLUE : BrandColors.WHITE, borderWidth: current ? BorderWidth.thick : BorderWidth.regular }]}>
+                    {filled ? <View style={styles.innerDot} /> : current ? <View style={styles.cursor} /> : null}
                   </View>
                 );
               })}
@@ -96,11 +102,11 @@ export default function PasscodeScreen() {
           </TouchableOpacity>
 
           {error ? (
-            <View style={s.errorBox}>
-              <Ionicons name="alert-circle" size={16} color="#DC2626" />
-              <Text style={s.errorText}>{error}</Text>
+            <View style={styles.errorBox}>
+              <Ionicons name="alert-circle" size={16} color={Colors.error} />
+              <Text style={styles.errorText}>{error}</Text>
             </View>
-          ) : <View style={{ height: 24 }} />}
+          ) : <View style={{ height: Spacing.xl }} />}
 
           {/* Solid Orange Background with White Text Button */}
           <PrimaryButton
@@ -108,37 +114,14 @@ export default function PasscodeScreen() {
             onPress={handleLoginPress}
             loading={loading}
             colorType="orange"
-            style={s.loginBtn}
+            style={styles.loginBtn}
           />
 
-          <TouchableOpacity activeOpacity={0.75} onPress={() => router.replace("/(auth)/login" as any)} style={s.switchBtn}>
-            <Text style={s.switchText}>Log in with a different mobile number</Text>
+          <TouchableOpacity activeOpacity={0.75} onPress={() => router.replace("/(auth)/login" as any)} style={styles.switchBtn}>
+            <Text style={styles.switchText}>Log in with a different mobile number</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
     </KeyboardAvoidingView>
   );
 }
-
-const s = StyleSheet.create({
-  container: { flex: 1 },
-  scroll: { flexGrow: 1, justifyContent: "center", paddingHorizontal: 24 },
-  backBtn: { position: "absolute", left: 20, width: 40, height: 40, borderRadius: 14, borderWidth: 1.2, borderColor: "#E2E8F0", backgroundColor: "#FFFFFF", justifyContent: "center", alignItems: "center", zIndex: 10, shadowColor: "#083B75", shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.06, shadowRadius: 4, elevation: 2 },
-  wrapper: { width: "100%", maxWidth: 380, alignSelf: "center" },
-  header: { alignItems: "center", marginBottom: 28 },
-  logo: { width: 72, height: 72, borderRadius: 18, marginBottom: 12 },
-  title: { fontSize: 24, fontWeight: "800", color: "#083B75", letterSpacing: 0.3, marginBottom: 6 },
-  sub: { fontSize: 14, color: "#64748B", textAlign: "center", lineHeight: 20 },
-  phoneHighlight: { color: "#083B75", fontWeight: "700" },
-  hiddenInput: { position: "absolute", opacity: 0, width: 1, height: 1 },
-  dotsTouchable: { width: "100%", alignItems: "center", marginVertical: 18 },
-  dotsRow: { flexDirection: "row", justifyContent: "center", gap: 12 },
-  dotBox: { width: 46, height: 56, borderRadius: 14, justifyContent: "center", alignItems: "center", shadowColor: "#083B75", shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.04, shadowRadius: 4, elevation: 1 },
-  innerDot: { width: 14, height: 14, borderRadius: 7, backgroundColor: "#FFFFFF" },
-  cursor: { width: 2, height: 22, backgroundColor: "#EA580C", borderRadius: 1 },
-  errorBox: { flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 6, marginBottom: 20, paddingHorizontal: 12 },
-  errorText: { fontSize: 13, color: "#DC2626", fontWeight: "600", textAlign: "center" },
-  loginBtn: { height: 52, borderRadius: 14, marginTop: 8 },
-  switchBtn: { marginTop: 20, paddingVertical: 6, alignItems: "center" },
-  switchText: { fontSize: 13.5, color: "#EA580C", fontWeight: "600" },
-});

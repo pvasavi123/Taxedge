@@ -20,8 +20,15 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Svg, { Path } from "react-native-svg";
 import { useTheme } from "../../hooks/use-theme";
+import { BrandColors, Colors, BorderWidth, Spacing } from "../../shared/theme";
 import { useAuthStore } from "../../store/authStore";
+import { styles } from "../../styles/app/(auth)/create-profile.styles";
 import type { IconName, ProfileFormValues } from "../../types/domain";
+
+const SCROLL_INSET_OFFSET = Spacing.xxl + Spacing.xl + Spacing.xs; // 60
+const MIN_SCROLL_BOTTOM = Spacing.xxl * 2 + Spacing.base; // 80
+const HEADER_INSET_TOP_OFFSET = Spacing.sm; // 8
+const MIN_HEADER_TOP = Spacing.xl; // 24
 
 /**
  * The signup form: the customer profile fields plus the credentials collected
@@ -206,12 +213,12 @@ export default function CreateProfileScreen() {
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
       keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 0}
-      style={[styles.container, { backgroundColor: "#F8FAFC" }]}
+      style={[styles.container, { backgroundColor: BrandColors.BACKGROUND }]}
     >
       <ScrollView
         contentContainerStyle={[
           styles.profileScroll,
-          { paddingBottom: Math.max(insets.bottom + 60, 80) },
+          { paddingBottom: Math.max(insets.bottom + SCROLL_INSET_OFFSET, MIN_SCROLL_BOTTOM) },
         ]}
         showsVerticalScrollIndicator={false}
         keyboardShouldPersistTaps="handled"
@@ -229,12 +236,12 @@ export default function CreateProfileScreen() {
             {/* Navy Blue Curved Base */}
             <Path
               d="M0,0 L375,0 L375,130 C310,180 230,175 140,145 C60,118 20,135 0,150 Z"
-              fill="#00204A"
+              fill={BrandColors.PRIMARY_BLUE_DARK}
             />
             {/* Orange Wave on Top Right */}
             <Path
               d="M250,0 C290,40 335,65 375,68 L375,0 Z"
-              fill="#F97316"
+              fill={BrandColors.PRIMARY_ORANGE}
             />
           </Svg>
 
@@ -242,7 +249,7 @@ export default function CreateProfileScreen() {
           <View
             style={[
               styles.waveHeaderContent,
-              { paddingTop: Math.max(insets.top + 8, 24) },
+              { paddingTop: Math.max(insets.top + HEADER_INSET_TOP_OFFSET, MIN_HEADER_TOP) },
             ]}
           >
             <TouchableOpacity
@@ -250,7 +257,7 @@ export default function CreateProfileScreen() {
               onPress={() => router.back()}
               style={styles.backBtnWhite}
             >
-              <Ionicons name="arrow-back" size={24} color="#FFFFFF" />
+              <Ionicons name="arrow-back" size={24} color={BrandColors.WHITE} />
             </TouchableOpacity>
 
             <View style={styles.headerTextGroup}>
@@ -275,12 +282,12 @@ export default function CreateProfileScreen() {
                     style={styles.avatarImage}
                   />
                 ) : (
-                  <Ionicons name="camera" size={38} color="#00204A" />
+                  <Ionicons name="camera" size={38} color={BrandColors.PRIMARY_BLUE_DARK} />
                 )}
               </View>
             </View>
             <View style={styles.avatarPlusBadge}>
-              <Ionicons name="add" size={18} color="#FFFFFF" />
+              <Ionicons name="add" size={18} color={BrandColors.WHITE} />
             </View>
           </TouchableOpacity>
         </View>
@@ -349,19 +356,19 @@ export default function CreateProfileScreen() {
               onPress={() => setShowCustomerTypeModal(true)}
               style={[
                 styles.inputBox,
-                profileErrors.customerType ? { borderColor: "#DC2626" } : null,
+                profileErrors.customerType ? { borderColor: Colors.error } : null,
               ]}
             >
               <Ionicons
                 name="briefcase-outline"
                 size={20}
-                color="#F97316"
+                color={BrandColors.PRIMARY_ORANGE}
                 style={styles.leftIcon}
               />
               <Text
                 style={[
                   styles.dropdownText,
-                  !form.customerType && { color: "#94A3B8" },
+                  !form.customerType && { color: BrandColors.TEXT_MUTED },
                 ]}
               >
                 {form.customerType || "Customer Type"}
@@ -375,7 +382,7 @@ export default function CreateProfileScreen() {
                 <Ionicons
                   name="chevron-down"
                   size={20}
-                  color="#64748B"
+                  color={BrandColors.TEXT_SECONDARY}
                 />
               </TouchableOpacity>
             </TouchableOpacity>
@@ -716,11 +723,11 @@ function Field({
           styles.inputBox,
           {
             borderColor: error
-              ? "#DC2626"
+              ? Colors.error
               : isFocused
-              ? "#F97316"
-              : "#E2E8F0",
-            borderWidth: isFocused ? 1.5 : 1,
+              ? BrandColors.PRIMARY_ORANGE
+              : BrandColors.BORDER,
+            borderWidth: isFocused ? BorderWidth.regular : BorderWidth.thin,
           },
         ]}
       >
@@ -728,7 +735,7 @@ function Field({
           <Ionicons
             name={leftIcon}
             size={20}
-            color="#F97316"
+            color={BrandColors.PRIMARY_ORANGE}
             style={styles.leftIcon}
           />
         )}
@@ -739,7 +746,7 @@ function Field({
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
           placeholder={placeholder}
-          placeholderTextColor="#94A3B8"
+          placeholderTextColor={BrandColors.TEXT_MUTED}
           keyboardType={keyboardType}
           maxLength={maxLength}
           {...props}
@@ -752,13 +759,13 @@ function Field({
               hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
               style={styles.rightIconTouch}
             >
-              <Ionicons name={rightIcon} size={20} color="#64748B" />
+              <Ionicons name={rightIcon} size={20} color={BrandColors.TEXT_SECONDARY} />
             </TouchableOpacity>
           ) : (
             <Ionicons
               name={rightIcon}
               size={18}
-              color="#64748B"
+              color={BrandColors.TEXT_SECONDARY}
               style={styles.rightIcon}
             />
           ))}
@@ -768,355 +775,3 @@ function Field({
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  errorText: {
-    fontSize: 12,
-    marginTop: 4,
-    fontWeight: "500",
-  },
-  profileScroll: {
-    flexGrow: 1,
-  },
-  waveHeaderWrapper: {
-    height: 195,
-    width: "100%",
-    position: "relative",
-  },
-  waveHeaderContent: {
-    paddingHorizontal: 20,
-  },
-  backBtnWhite: {
-    width: 40,
-    height: 40,
-    justifyContent: "center",
-    marginBottom: 4,
-  },
-  headerTextGroup: {
-    marginTop: 2,
-  },
-  headerTitleWhite: {
-    fontSize: 26,
-    fontWeight: "800",
-    color: "#FFFFFF",
-    letterSpacing: -0.3,
-  },
-  avatarSection: {
-    alignItems: "center",
-    marginTop: -45,
-    marginBottom: 16,
-    zIndex: 10,
-  },
-  avatarWrap: {
-    position: "relative",
-  },
-  avatarOuterRing: {
-    width: 96,
-    height: 96,
-    borderRadius: 48,
-    borderWidth: 1.5,
-    borderColor: "#94A3B8",
-    borderStyle: "dashed",
-    backgroundColor: "#FFFFFF",
-    justifyContent: "center",
-    alignItems: "center",
-    shadowColor: "#00204A",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 4,
-  },
-  avatarInnerCircle: {
-    width: 78,
-    height: 78,
-    borderRadius: 39,
-    backgroundColor: "#F1F5F9",
-    justifyContent: "center",
-    alignItems: "center",
-    overflow: "hidden",
-  },
-  avatarImage: {
-    width: "100%",
-    height: "100%",
-  },
-  avatarPlusBadge: {
-    position: "absolute",
-    right: 2,
-    bottom: 2,
-    width: 26,
-    height: 26,
-    borderRadius: 13,
-    backgroundColor: "#F97316",
-    borderWidth: 2,
-    borderColor: "#FFFFFF",
-    justifyContent: "center",
-    alignItems: "center",
-    elevation: 3,
-  },
-  formSection: {
-    gap: 2,
-    paddingHorizontal: 20,
-  },
-  fieldContainer: {
-    marginBottom: 14,
-  },
-  label: {
-    fontSize: 13,
-    fontWeight: "600",
-    marginBottom: 6,
-    color: "#0F274A",
-  },
-  inputBox: {
-    height: 52,
-    borderRadius: 12,
-    paddingHorizontal: 14,
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "#FFFFFF",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.04,
-    shadowRadius: 3,
-    elevation: 1,
-  },
-  leftIcon: {
-    marginRight: 10,
-  },
-  input: {
-    flex: 1,
-    fontSize: 15,
-    height: "100%",
-    color: "#0F172A",
-  },
-  rightIcon: {
-    marginLeft: 8,
-  },
-  rightIconTouch: {
-    marginLeft: 8,
-    padding: 4,
-  },
-  submitBtnOrange: {
-    backgroundColor: "#F97316",
-    height: 54,
-    borderRadius: 14,
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 18,
-    shadowColor: "#F97316",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.35,
-    shadowRadius: 8,
-    elevation: 4,
-  },
-  submitBtnText: {
-    color: "#FFFFFF",
-    fontSize: 17,
-    fontWeight: "700",
-    letterSpacing: 0.3,
-  },
-  loginRow: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 20,
-    paddingBottom: 20,
-  },
-  alreadyText: {
-    fontSize: 14,
-    color: "#0F274A",
-    fontWeight: "500",
-  },
-  loginLinkText: {
-    fontSize: 14,
-    color: "#F97316",
-    fontWeight: "700",
-  },
-  dropdownText: {
-    flex: 1,
-    fontSize: 15,
-    color: "#0F172A",
-    fontWeight: "500",
-  },
-  customerTypeModalContent: {
-    width: "100%",
-    maxWidth: 360,
-    backgroundColor: "#FFFFFF",
-    borderRadius: 20,
-    padding: 20,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.15,
-    shadowRadius: 10,
-    elevation: 8,
-  },
-  customerTypeOption: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    paddingVertical: 12,
-    paddingHorizontal: 12,
-    borderRadius: 10,
-    marginBottom: 4,
-  },
-  customerTypeOptionSelected: {
-    backgroundColor: "#FFF7ED",
-  },
-  customerTypeOptionLeft: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  customerTypeOptionText: {
-    fontSize: 15,
-    color: "#334155",
-    fontWeight: "500",
-  },
-  customerTypeOptionTextSelected: {
-    color: "#F97316",
-    fontWeight: "700",
-  },
-  selectedBadge: {
-    backgroundColor: "#FFEDD5",
-    paddingHorizontal: 8,
-    paddingVertical: 2,
-    borderRadius: 6,
-  },
-  selectedBadgeText: {
-    fontSize: 11,
-    color: "#EA580C",
-    fontWeight: "700",
-  },
-  modalOverlay: {
-    flex: 1,
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-    justifyContent: "center",
-    alignItems: "center",
-    paddingHorizontal: 20,
-  },
-  calendarModalContent: {
-    width: "100%",
-    maxWidth: 360,
-    borderRadius: 20,
-    padding: 20,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.15,
-    shadowRadius: 10,
-    elevation: 8,
-  },
-  calendarHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: 16,
-  },
-  calendarTitle: {
-    fontSize: 18,
-    fontWeight: "700",
-  },
-  monthYearNav: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    backgroundColor: "#F0F4FA",
-    borderRadius: 12,
-    paddingVertical: 8,
-    paddingHorizontal: 12,
-    marginBottom: 12,
-  },
-  navArrow: {
-    padding: 6,
-    borderRadius: 8,
-    backgroundColor: "#E2EDFB",
-  },
-  monthYearDisplay: {
-    alignItems: "center",
-  },
-  monthYearText: {
-    fontSize: 16,
-    fontWeight: "700",
-  },
-  yearQuickRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginBottom: 14,
-    gap: 6,
-  },
-  yearChip: {
-    flex: 1,
-    backgroundColor: "#FFFFFF",
-    paddingVertical: 6,
-    borderRadius: 8,
-    alignItems: "center",
-    borderWidth: 1,
-    borderColor: "#BFDBFE",
-  },
-  yearChipText: {
-    fontSize: 12,
-    fontWeight: "600",
-    color: "#083B75",
-  },
-  weekdaysRow: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    marginBottom: 8,
-  },
-  weekdayText: {
-    fontSize: 13,
-    fontWeight: "600",
-    color: "#64748B",
-    width: 38,
-    textAlign: "center",
-  },
-  daysGrid: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "flex-start",
-    marginBottom: 18,
-  },
-  dayCellEmpty: {
-    width: "14.28%",
-    height: 38,
-  },
-  dayCell: {
-    width: "14.28%",
-    height: 38,
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 10,
-  },
-  dayCellText: {
-    fontSize: 14,
-    fontWeight: "600",
-  },
-  modalButtonsRow: {
-    flexDirection: "row",
-    gap: 12,
-  },
-  modalCancelBtn: {
-    flex: 1,
-    paddingVertical: 12,
-    borderRadius: 12,
-    borderWidth: 1.5,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#FFFFFF",
-  },
-  modalCancelText: {
-    fontSize: 15,
-    fontWeight: "600",
-  },
-  modalConfirmBtn: {
-    flex: 1,
-    paddingVertical: 12,
-    borderRadius: 12,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  modalConfirmText: {
-    fontSize: 15,
-    fontWeight: "600",
-    color: "#FFFFFF",
-  },
-});

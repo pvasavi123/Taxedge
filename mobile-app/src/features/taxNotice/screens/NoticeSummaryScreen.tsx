@@ -2,7 +2,6 @@ import React from "react";
 import {
   View,
   Text,
-  StyleSheet,
   ScrollView,
   TouchableOpacity,
   StatusBar,
@@ -14,6 +13,7 @@ import { TaxNoticeHeader } from "../components/common/TaxNoticeHeader";
 import { NoticeMetadataCard } from "../components/summary/NoticeMetadataCard";
 import { NoticeExplanationCard } from "../components/summary/NoticeExplanationCard";
 import { MOCK_NOTICE_SUMMARY } from "../mock/taxNoticeData";
+import { styles } from "./NoticeSummaryScreen.styles";
 
 export const NoticeSummaryScreen: React.FC = () => {
   const router = useRouter();
@@ -94,80 +94,5 @@ export const NoticeSummaryScreen: React.FC = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#F8FAFC",
-  },
-  scrollContent: {
-    paddingHorizontal: 16,
-    paddingTop: 16,
-  },
-  titleSection: {
-    marginBottom: 16,
-  },
-  pageTitle: {
-    fontSize: 20,
-    fontWeight: "800",
-    color: "#0B1F3A",
-    letterSpacing: -0.2,
-  },
-  pageSubtitle: {
-    fontSize: 12.5,
-    color: "#64748B",
-    marginTop: 4,
-    lineHeight: 18,
-    fontWeight: "400",
-  },
-  bottomBar: {
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    right: 0,
-    backgroundColor: "#FFFFFF",
-    paddingHorizontal: 16,
-    paddingTop: 10,
-    borderTopWidth: 1,
-    borderTopColor: "#F1F5F9",
-    ...Platform.select({
-      ios: {
-        shadowColor: "#0B1F3A",
-        shadowOffset: { width: 0, height: -3 },
-        shadowOpacity: 0.04,
-        shadowRadius: 6,
-      },
-      android: {
-        elevation: 6,
-      },
-      default: {},
-    }),
-  },
-  continueButton: {
-    height: 52,
-    borderRadius: 16,
-    backgroundColor: "#F97316",
-    justifyContent: "center",
-    alignItems: "center",
-    ...Platform.select({
-      ios: {
-        shadowColor: "#F97316",
-        shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 0.25,
-        shadowRadius: 8,
-      },
-      android: {
-        elevation: 3,
-      },
-      default: {},
-    }),
-  },
-  continueButtonText: {
-    color: "#FFFFFF",
-    fontSize: 16,
-    fontWeight: "700",
-    letterSpacing: 0.2,
-  },
-});
 
 export default NoticeSummaryScreen;

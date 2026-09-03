@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
-  StyleSheet,
   FlatList,
   TouchableOpacity,
   TextInput,
@@ -10,10 +9,12 @@ import {
 } from "react-native";
 import { useRouter, useLocalSearchParams } from "expo-router";
 import { useTheme } from "../hooks/use-theme";
+import { BrandColors } from "../shared/theme";
 import { SERVICES, CATEGORIES } from "../data/services";
 import { ScreenLayout } from "../components/ScreenLayout";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { styles } from "../styles/app/services.styles";
 
 export default function ServicesScreen() {
   const colors = useTheme();
@@ -99,7 +100,7 @@ export default function ServicesScreen() {
             <Text
               style={[
                 styles.pillText,
-                { color: activeCategory === "ALL" ? "#FFFFFF" : colors.text },
+                { color: activeCategory === "ALL" ? BrandColors.WHITE : colors.text },
               ]}
             >
               All Services
@@ -127,7 +128,8 @@ export default function ServicesScreen() {
                 style={[
                   styles.pillText,
                   {
-                    color: activeCategory === cat.id ? "#FFFFFF" : colors.text,
+                    color:
+                      activeCategory === cat.id ? BrandColors.WHITE : colors.text,
                   },
                 ]}
               >
@@ -244,133 +246,3 @@ export default function ServicesScreen() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  searchContainer: {
-    paddingHorizontal: 16,
-    paddingTop: 16,
-    paddingBottom: 8,
-  },
-  searchBar: {
-    height: 48,
-    borderRadius: 10,
-    borderWidth: 1.5,
-    flexDirection: "row",
-    alignItems: "center",
-    paddingHorizontal: 12,
-  },
-  searchInput: {
-    flex: 1,
-    height: "100%",
-    marginLeft: 8,
-    fontSize: 14,
-    fontWeight: "500",
-  },
-  categoriesContainer: {
-    marginBottom: 8,
-  },
-  pillsScroll: {
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    gap: 8,
-  },
-  pillBtn: {
-    paddingHorizontal: 16,
-    height: 38,
-    borderRadius: 19,
-    borderWidth: 1.5,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  pillText: {
-    fontSize: 13,
-    fontWeight: "700",
-  },
-  listContent: {
-    padding: 16,
-    gap: 12,
-    paddingBottom: 32,
-  },
-  serviceCard: {
-    borderRadius: 14,
-    borderWidth: 1.5,
-    padding: 16,
-  },
-  cardHeader: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  iconBg: {
-    width: 44,
-    height: 44,
-    borderRadius: 10,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  headerInfo: {
-    marginLeft: 12,
-    flex: 1,
-  },
-  serviceName: {
-    fontSize: 16,
-    fontWeight: "700",
-  },
-  catBadge: {
-    alignSelf: "flex-start",
-    paddingHorizontal: 8,
-    paddingVertical: 2,
-    borderRadius: 4,
-    marginTop: 4,
-  },
-  catBadgeText: {
-    fontSize: 10,
-    fontWeight: "800",
-  },
-  serviceDesc: {
-    fontSize: 13,
-    marginTop: 12,
-    lineHeight: 18,
-  },
-  cardFooter: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginTop: 14,
-    paddingTop: 12,
-    borderTopWidth: 1,
-    borderTopColor: "#00000005",
-  },
-  docsCountContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 6,
-  },
-  docsCountText: {
-    fontSize: 12,
-    fontWeight: "500",
-  },
-  actionBtn: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 4,
-  },
-  actionBtnText: {
-    fontSize: 13,
-    fontWeight: "700",
-  },
-  emptyContainer: {
-    alignItems: "center",
-    justifyContent: "center",
-    paddingVertical: 64,
-  },
-  emptyText: {
-    fontSize: 16,
-    fontWeight: "700",
-  },
-  emptySub: {
-    fontSize: 13,
-    marginTop: 6,
-  },
-});

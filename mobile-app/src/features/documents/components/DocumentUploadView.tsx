@@ -3,7 +3,6 @@ import {
   View,
   Text,
   TouchableOpacity,
-  StyleSheet,
   ScrollView,
   Platform,
   Alert,
@@ -11,6 +10,8 @@ import {
 import Ionicons from "@expo/vector-icons/Ionicons";
 import * as DocumentPicker from "expo-document-picker";
 import * as ImagePicker from "expo-image-picker";
+import { BrandColors } from "../../../shared/theme";
+import { styles } from "./DocumentUploadView.styles";
 import type { DocumentItem, DocumentWorkflowStatus } from "../types/documentTypes";
 
 export interface DocumentUploadViewProps {
@@ -124,7 +125,7 @@ export const DocumentUploadView: React.FC<DocumentUploadViewProps> = ({
         style={styles.dropzone}
       >
         <View style={styles.cloudBadge}>
-          <Ionicons name="cloud-upload" size={24} color="#FFFFFF" />
+          <Ionicons name="cloud-upload" size={24} color={BrandColors.WHITE} />
         </View>
         <Text style={styles.dropzoneTitle}>Upload Document</Text>
         <Text style={styles.dropzoneSub}>PDF, JPG, PNG, Excel or Word</Text>
@@ -261,7 +262,7 @@ export const DocumentUploadView: React.FC<DocumentUploadViewProps> = ({
                         hitSlop={8}
                         style={styles.deleteIconBtn}
                       >
-                        <Ionicons name="trash-outline" size={16} color="#EA580C" />
+                        <Ionicons name="trash-outline" size={16} color={BrandColors.PRIMARY_ORANGE_DARK} />
                       </TouchableOpacity>
                     )}
                   </View>
@@ -291,7 +292,7 @@ export const DocumentUploadView: React.FC<DocumentUploadViewProps> = ({
                     onPress={() => (onReuploadFile ? onReuploadFile(doc.id) : handleBrowseFiles(doc.id))}
                     style={styles.reuploadBtn}
                   >
-                    <Ionicons name="refresh" size={13} color="#FFFFFF" />
+                    <Ionicons name="refresh" size={13} color={BrandColors.WHITE} />
                     <Text style={styles.reuploadBtnText}>Re-upload</Text>
                   </TouchableOpacity>
                 </View>
@@ -305,7 +306,7 @@ export const DocumentUploadView: React.FC<DocumentUploadViewProps> = ({
       {/* 5. NOTICE / INSTRUCTIONS CALLOUT BANNER */}
       <View style={styles.noticeBanner}>
         <View style={styles.noticeIconWrap}>
-          <Ionicons name="information-circle-outline" size={20} color="#EA580C" />
+          <Ionicons name="information-circle-outline" size={20} color={BrandColors.PRIMARY_ORANGE_DARK} />
         </View>
         <Text style={styles.noticeText}>
           Ensure all documents are clear, readable and not expired. Blurry or cropped documents may cause delays.
@@ -325,361 +326,3 @@ export const DocumentUploadView: React.FC<DocumentUploadViewProps> = ({
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    width: "100%",
-    gap: 16,
-  },
-  /* Top Dashed Dropzone */
-  dropzone: {
-    backgroundColor: "#FFFFFF",
-    borderRadius: 18,
-    borderWidth: 1.5,
-    borderColor: "#F97316", // Orange dashed border
-    borderStyle: "dashed",
-    paddingVertical: 22,
-    paddingHorizontal: 16,
-    alignItems: "center",
-    justifyContent: "center",
-    gap: 4,
-    ...Platform.select({
-      web: { cursor: "pointer" },
-    }),
-  },
-  cloudBadge: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
-    backgroundColor: "#F97316", // Solid orange circle
-    alignItems: "center",
-    justifyContent: "center",
-    marginBottom: 6,
-    shadowColor: "#F97316",
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.3,
-    shadowRadius: 6,
-    elevation: 3,
-  },
-  dropzoneTitle: {
-    fontSize: 16,
-    fontWeight: "800",
-    color: "#083B75", // Dominant Navy Blue
-    letterSpacing: -0.2,
-  },
-  dropzoneSub: {
-    fontSize: 12.5,
-    fontWeight: "500",
-    color: "#64748B",
-    marginTop: 2,
-  },
-  dropzoneNote: {
-    fontSize: 11.5,
-    fontWeight: "400",
-    color: "#94A3B8",
-  },
-
-  /* Action Buttons Row */
-  actionButtonsRow: {
-    flexDirection: "row",
-    gap: 10,
-    justifyContent: "space-between",
-  },
-  actionPillBtn: {
-    flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: 6,
-    backgroundColor: "#FFFFFF",
-    borderRadius: 12,
-    borderWidth: 1.2,
-    borderColor: "#E2E8F0",
-    paddingVertical: 10,
-    paddingHorizontal: 8,
-    shadowColor: "#083B75",
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.04,
-    shadowRadius: 4,
-    elevation: 1,
-  },
-  actionPillText: {
-    fontSize: 12.5,
-    fontWeight: "700",
-    color: "#083B75",
-  },
-
-  /* Section Title */
-  sectionHeader: {
-    marginTop: 4,
-  },
-  sectionTitle: {
-    fontSize: 16,
-    fontWeight: "800",
-    color: "#083B75", // Dominant Navy Blue
-    letterSpacing: -0.2,
-  },
-  sectionSub: {
-    fontSize: 12,
-    color: "#64748B",
-    marginTop: 2,
-  },
-
-  /* Empty State */
-  emptyContainer: {
-    backgroundColor: "#FFFFFF",
-    borderRadius: 16,
-    borderWidth: 1.2,
-    borderColor: "#E2E8F0",
-    borderStyle: "dashed",
-    paddingVertical: 28,
-    paddingHorizontal: 20,
-    alignItems: "center",
-    justifyContent: "center",
-    shadowColor: "#083B75",
-    shadowOpacity: 0.02,
-    shadowRadius: 4,
-    elevation: 1,
-  },
-  emptyIconCircle: {
-    width: 52,
-    height: 52,
-    borderRadius: 26,
-    backgroundColor: "#FFF1E6",
-    alignItems: "center",
-    justifyContent: "center",
-    marginBottom: 8,
-  },
-  emptyTitle: {
-    fontSize: 14.5,
-    fontWeight: "700",
-    color: "#083B75",
-    marginBottom: 4,
-  },
-  emptySub: {
-    fontSize: 12,
-    color: "#64748B",
-    textAlign: "center",
-    maxWidth: 260,
-    lineHeight: 17,
-  },
-
-  /* Document Cards List */
-  docList: {
-    gap: 12,
-  },
-  docCard: {
-    backgroundColor: "#FFFFFF",
-    borderRadius: 16,
-    borderWidth: 1.2,
-    borderColor: "#E2E8F0",
-    padding: 14,
-    shadowColor: "#083B75",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.04,
-    shadowRadius: 6,
-    elevation: 2,
-  },
-  docCardTop: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  fileIconBadge: {
-    width: 42,
-    height: 42,
-    borderRadius: 12,
-    alignItems: "center",
-    justifyContent: "center",
-    borderWidth: 1,
-    marginRight: 12,
-  },
-  docInfo: {
-    flex: 1,
-    paddingRight: 8,
-  },
-  docFileName: {
-    fontSize: 14,
-    fontWeight: "700",
-    color: "#083B75",
-    marginBottom: 3,
-  },
-  docMeta: {
-    fontSize: 12,
-    fontWeight: "500",
-    color: "#64748B",
-  },
-  statusWrap: {
-    alignItems: "flex-end",
-    justifyContent: "center",
-  },
-  statusRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 8,
-  },
-  deleteIconBtn: {
-    width: 30,
-    height: 30,
-    borderRadius: 8,
-    backgroundColor: "#FFF1E6",
-    borderWidth: 1,
-    borderColor: "#FED7AA",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-
-  /* Status Badges */
-  orangeBadge: {
-    backgroundColor: "#FFF1E6",
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: "#FED7AA",
-  },
-  orangeBadgeText: {
-    fontSize: 11.5,
-    fontWeight: "700",
-    color: "#EA580C",
-  },
-  greenBadge: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 4,
-    backgroundColor: "#DCFCE7",
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: "#BBF7D0",
-  },
-  greenBadgeText: {
-    fontSize: 11.5,
-    fontWeight: "700",
-    color: "#15803D",
-  },
-  redBadge: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 4,
-    backgroundColor: "#FEE2E2",
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: "#FECDD3",
-  },
-  redBadgeText: {
-    fontSize: 11.5,
-    fontWeight: "700",
-    color: "#DC2626",
-  },
-  uploadMiniBtn: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 4,
-    backgroundColor: "#FFF1E6",
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: "#FED7AA",
-  },
-  uploadMiniBtnText: {
-    fontSize: 12,
-    fontWeight: "700",
-    color: "#EA580C",
-  },
-
-  /* Progress Bar */
-  progressBarTrack: {
-    height: 4,
-    backgroundColor: "#EDF2F7",
-    borderRadius: 2,
-    overflow: "hidden",
-    marginTop: 10,
-    width: "78%",
-    alignSelf: "flex-start",
-    marginLeft: 54, // aligns with doc info
-  },
-  progressBarFill: {
-    height: "100%",
-    backgroundColor: "#F97316", // Orange progress fill
-    borderRadius: 2,
-  },
-
-  /* Rejected Notice & Action */
-  rejectedContainer: {
-    marginTop: 8,
-    paddingTop: 8,
-    borderTopWidth: 1,
-    borderTopColor: "#FEE2E2",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-  rejectedReasonText: {
-    fontSize: 11.5,
-    fontWeight: "500",
-    color: "#DC2626",
-    flex: 1,
-    paddingRight: 8,
-  },
-  reuploadBtn: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 4,
-    backgroundColor: "#F97316",
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    borderRadius: 6,
-  },
-  reuploadBtnText: {
-    fontSize: 11.5,
-    fontWeight: "700",
-    color: "#FFFFFF",
-  },
-
-  /* Notice Callout Banner */
-  noticeBanner: {
-    flexDirection: "row",
-    alignItems: "flex-start",
-    gap: 10,
-    backgroundColor: "#FFF7ED",
-    borderRadius: 14,
-    borderWidth: 1,
-    borderColor: "#FFEDD5",
-    padding: 12,
-  },
-  noticeIconWrap: {
-    marginTop: 1,
-  },
-  noticeText: {
-    flex: 1,
-    fontSize: 12,
-    fontWeight: "500",
-    color: "#9A3412",
-    lineHeight: 17,
-  },
-
-  /* Bottom Primary Orange Button */
-  primaryContinueBtn: {
-    backgroundColor: "#F97316", // Solid Orange
-    borderRadius: 14,
-    height: 50,
-    alignItems: "center",
-    justifyContent: "center",
-    shadowColor: "#F97316",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 8,
-    elevation: 4,
-    marginTop: 4,
-  },
-  primaryContinueBtnText: {
-    fontSize: 15.5,
-    fontWeight: "800",
-    color: "#FFFFFF",
-    letterSpacing: -0.2,
-  },
-});

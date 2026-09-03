@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {
   View,
   Text,
-  StyleSheet,
   ScrollView,
   TouchableOpacity,
   Platform,
@@ -11,8 +10,9 @@ import {
 import { useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { BrandColors } from "../../shared/theme";
+import { BrandColors, Spacing } from "../../shared/theme";
 import { PaymentOrderSummaryCard } from "../../features/gst/components/payment/PaymentOrderSummaryCard";
+import { styles } from "../../styles/app/(main)/payments.styles";
 import {
   PaymentMethodSelector,
   PaymentMethodType,
@@ -97,7 +97,7 @@ export default function PaymentsScreen() {
   };
 
   return (
-    <View style={[styles.root, { paddingTop: Math.max(insets.top, 12) }]}>
+    <View style={[styles.root, { paddingTop: Math.max(insets.top, Spacing.md) }]}>
       {/* Header */}
       <View style={styles.headerBar}>
         <TouchableOpacity activeOpacity={0.7} onPress={handleBack} style={styles.backButton}>
@@ -204,60 +204,3 @@ export default function PaymentsScreen() {
   );
 }
 
-const styles = StyleSheet.create({
-  root: { flex: 1, backgroundColor: "#F8FAFC" },
-  headerBar: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    paddingHorizontal: 16,
-    paddingBottom: 12,
-    backgroundColor: "#FFFFFF",
-    borderBottomWidth: 1,
-    borderBottomColor: "#F1F5F9",
-  },
-  backButton: {
-    width: 38,
-    height: 38,
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: "#E2E8F0",
-    backgroundColor: "#FFFFFF",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  headerTitle: {
-    fontSize: 18,
-    fontWeight: "700",
-    color: BrandColors.TEXT_PRIMARY,
-    fontFamily: Platform.select({ ios: "System", android: "sans-serif-medium" }),
-  },
-  placeholderBox: { width: 38 },
-  scrollView: { flex: 1 },
-  scrollContent: {
-    paddingHorizontal: 16,
-    paddingTop: 16,
-    paddingBottom: 240,
-    gap: 16,
-    flexGrow: 1,
-  },
-  buttonWrapper: { marginTop: 4, marginBottom: 8 },
-  payBtn: {
-    height: 52,
-    borderRadius: 26,
-    backgroundColor: BrandColors.PRIMARY_ORANGE,
-    justifyContent: "center",
-    alignItems: "center",
-    shadowColor: BrandColors.PRIMARY_ORANGE,
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.25,
-    shadowRadius: 8,
-    elevation: 3,
-  },
-  payBtnText: {
-    fontSize: 15,
-    fontWeight: "700",
-    color: "#FFFFFF",
-    fontFamily: Platform.select({ ios: "System", android: "sans-serif-medium" }),
-  },
-});

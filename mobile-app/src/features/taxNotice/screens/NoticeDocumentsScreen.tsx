@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {
   View,
   Text,
-  StyleSheet,
   TextInput,
   ScrollView,
   TouchableOpacity,
@@ -16,6 +15,7 @@ import { TaxNoticeHeader } from "../components/common/TaxNoticeHeader";
 import { NoticeDocUploadCard } from "../components/documents/NoticeDocUploadCard";
 import { MOCK_SUPPORTING_DOCS } from "../mock/taxNoticeData";
 import { TaxNoticeSupportingDoc } from "../types/taxNotice.types";
+import { styles } from "./NoticeDocumentsScreen.styles";
 
 export const NoticeDocumentsScreen: React.FC = () => {
   const router = useRouter();
@@ -176,127 +176,5 @@ export const NoticeDocumentsScreen: React.FC = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#F8FAFC",
-  },
-  scrollContent: {
-    paddingHorizontal: 16,
-    paddingTop: 16,
-  },
-  titleSection: {
-    marginBottom: 14,
-  },
-  pageTitle: {
-    fontSize: 20,
-    fontWeight: "800",
-    color: "#0B1F3A",
-    letterSpacing: -0.2,
-  },
-  pageSubtitle: {
-    fontSize: 12.5,
-    color: "#64748B",
-    marginTop: 4,
-    lineHeight: 18,
-    fontWeight: "400",
-  },
-  progressContainer: {
-    marginBottom: 14,
-  },
-  counterText: {
-    fontSize: 12.5,
-    fontWeight: "600",
-    color: "#64748B",
-    marginBottom: 8,
-  },
-  progressTrack: {
-    height: 6,
-    borderRadius: 3,
-    backgroundColor: "#E2E8F0",
-    overflow: "hidden",
-  },
-  progressFill: {
-    height: "100%",
-    backgroundColor: "#F97316",
-    borderRadius: 3,
-  },
-  remarksSection: {
-    marginTop: 6,
-    marginBottom: 16,
-  },
-  remarksLabel: {
-    fontSize: 13,
-    fontWeight: "700",
-    color: "#0B1F3A",
-    marginBottom: 6,
-  },
-  remarksInput: {
-    minHeight: 80,
-    backgroundColor: "#FFFFFF",
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: "#E2E8F0",
-    padding: 12,
-    fontSize: 13.5,
-    color: "#0B1F3A",
-    textAlignVertical: "top",
-  },
-  charCounter: {
-    fontSize: 11,
-    color: "#94A3B8",
-    textAlign: "right",
-    marginTop: 4,
-  },
-  bottomBar: {
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    right: 0,
-    backgroundColor: "#FFFFFF",
-    paddingHorizontal: 16,
-    paddingTop: 10,
-    borderTopWidth: 1,
-    borderTopColor: "#F1F5F9",
-    ...Platform.select({
-      ios: {
-        shadowColor: "#0B1F3A",
-        shadowOffset: { width: 0, height: -3 },
-        shadowOpacity: 0.04,
-        shadowRadius: 6,
-      },
-      android: {
-        elevation: 6,
-      },
-      default: {},
-    }),
-  },
-  submitButton: {
-    height: 52,
-    borderRadius: 16,
-    backgroundColor: "#F97316",
-    justifyContent: "center",
-    alignItems: "center",
-    ...Platform.select({
-      ios: {
-        shadowColor: "#F97316",
-        shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 0.25,
-        shadowRadius: 8,
-      },
-      android: {
-        elevation: 3,
-      },
-      default: {},
-    }),
-  },
-  submitButtonText: {
-    color: "#FFFFFF",
-    fontSize: 16,
-    fontWeight: "700",
-    letterSpacing: 0.2,
-  },
-});
 
 export default NoticeDocumentsScreen;

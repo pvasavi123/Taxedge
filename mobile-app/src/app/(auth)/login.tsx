@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, KeyboardAvoidingView, Platform, ScrollView, Image, TextInput, TouchableOpacity, Alert } from "react-native";
+import { View, Text, KeyboardAvoidingView, Platform, ScrollView, Image, TextInput, TouchableOpacity, Alert } from "react-native";
 import { useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Svg, { Path } from "react-native-svg";
 import { useTheme } from "../../hooks/use-theme";
+import { BrandColors, Spacing } from "../../shared/theme";
 import { useAuthStore } from "../../store/authStore";
 import { devAuthService } from "../../features/developmentAuth";
 import { PrimaryButton } from "../../components/PrimaryButton";
+import { styles } from "../../styles/app/(auth)/login.styles";
+
+const HEADER_OFFSET = Spacing.md;
+const FOOTER_OFFSET = Spacing.base;
+const MIN_SCROLL_PADDING = Spacing.xl + Spacing.xs;
 
 function GoogleIcon({ size = 20 }: { size?: number }) {
   return (
@@ -54,25 +60,25 @@ export default function LoginScreen() {
   };
 
   return (
-    <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={[s.container, { backgroundColor: colors.background }]}>
-      <ScrollView contentContainerStyle={[s.scroll, { paddingTop: Math.max(insets.top + 12, 28), paddingBottom: Math.max(insets.bottom + 16, 28) }]} keyboardShouldPersistTaps="handled" showsVerticalScrollIndicator={false}>
-        <View style={s.wrapper}>
-          <View style={s.header}>
-            <Image source={require("../../../assets/images/icon.png")} style={s.logo} resizeMode="contain" />
-            <Text style={[s.brandTitle, { color: colors.primaryDark }]}>TAXEDGE</Text>
-            <Text style={[s.brandSub, { color: colors.textSecondary }]}>FIN SOLUTIONS</Text>
+    <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={[styles.container, { backgroundColor: colors.background }]}>
+      <ScrollView contentContainerStyle={[styles.scroll, { paddingTop: Math.max(insets.top + HEADER_OFFSET, MIN_SCROLL_PADDING), paddingBottom: Math.max(insets.bottom + FOOTER_OFFSET, MIN_SCROLL_PADDING) }]} keyboardShouldPersistTaps="handled" showsVerticalScrollIndicator={false}>
+        <View style={styles.wrapper}>
+          <View style={styles.header}>
+            <Image source={require("../../../assets/images/icon.png")} style={styles.logo} resizeMode="contain" />
+            <Text style={[styles.brandTitle, { color: colors.primaryDark }]}>TAXEDGE</Text>
+            <Text style={[styles.brandSub, { color: colors.textSecondary }]}>FIN SOLUTIONS</Text>
           </View>
 
-          <View style={s.welcome}>
-            <Text style={[s.welcomeTitle, { color: colors.text }]}>Welcome Back 👋</Text>
-            <Text style={[s.welcomeSub, { color: colors.textSecondary }]}>Login to continue with TaxEdge</Text>
+          <View style={styles.welcome}>
+            <Text style={[styles.welcomeTitle, { color: colors.text }]}>Welcome Back 👋</Text>
+            <Text style={[styles.welcomeSub, { color: colors.textSecondary }]}>Login to continue with TaxEdge</Text>
           </View>
 
-          <View style={s.form}>
-            <Text style={[s.label, { color: colors.text }]}>Mobile Number</Text>
-            <View style={s.phoneRow}>
-              <View style={[s.codeBox, { borderColor: isFocused ? "#083B75" : colors.border, backgroundColor: colors.backgroundElement }]}>
-                <Text style={[s.codeText, { color: colors.text }]}>+91</Text>
+          <View style={styles.form}>
+            <Text style={[styles.label, { color: colors.text }]}>Mobile Number</Text>
+            <View style={styles.phoneRow}>
+              <View style={[styles.codeBox, { borderColor: isFocused ? BrandColors.PRIMARY_BLUE : colors.border, backgroundColor: colors.backgroundElement }]}>
+                <Text style={[styles.codeText, { color: colors.text }]}>+91</Text>
               </View>
               <TextInput
                 value={mobile}
@@ -83,23 +89,23 @@ export default function LoginScreen() {
                 placeholderTextColor={colors.textSecondary}
                 keyboardType="phone-pad"
                 maxLength={10}
-                style={[s.input, { color: colors.text, backgroundColor: colors.backgroundElement, borderColor: error ? colors.error : isFocused ? "#083B75" : colors.border }]}
+                style={[styles.input, { color: colors.text, backgroundColor: colors.backgroundElement, borderColor: error ? colors.error : isFocused ? BrandColors.PRIMARY_BLUE : colors.border }]}
               />
             </View>
 
-            {error ? <Text style={[s.error, { color: colors.error }]}>{error}</Text> : null}
+            {error ? <Text style={[styles.error, { color: colors.error }]}>{error}</Text> : null}
 
-            <PrimaryButton title="Continue" onPress={handleContinue} loading={loading} colorType="orange" style={s.continueBtn} />
+            <PrimaryButton title="Continue" onPress={handleContinue} loading={loading} colorType="orange" style={styles.continueBtn} />
 
-            <View style={s.dividerRow}>
-              <View style={[s.dividerLine, { backgroundColor: colors.border }]} />
-              <Text style={[s.dividerText, { color: colors.textSecondary }]}>or</Text>
-              <View style={[s.dividerLine, { backgroundColor: colors.border }]} />
+            <View style={styles.dividerRow}>
+              <View style={[styles.dividerLine, { backgroundColor: colors.border }]} />
+              <Text style={[styles.dividerText, { color: colors.textSecondary }]}>or</Text>
+              <View style={[styles.dividerLine, { backgroundColor: colors.border }]} />
             </View>
 
-            <TouchableOpacity activeOpacity={0.8} onPress={() => Alert.alert("Google Sign-In", "Google authentication will be available soon.")} style={[s.googleBtn, { backgroundColor: colors.backgroundElement, borderColor: colors.border }]}>
+            <TouchableOpacity activeOpacity={0.8} onPress={() => Alert.alert("Google Sign-In", "Google authentication will be available soon.")} style={[styles.googleBtn, { backgroundColor: colors.backgroundElement, borderColor: colors.border }]}>
               <GoogleIcon size={20} />
-              <Text style={[s.googleText, { color: colors.text }]}>Continue with Google</Text>
+              <Text style={[styles.googleText, { color: colors.text }]}>Continue with Google</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -107,29 +113,3 @@ export default function LoginScreen() {
     </KeyboardAvoidingView>
   );
 }
-
-const s = StyleSheet.create({
-  container: { flex: 1 },
-  scroll: { flexGrow: 1, justifyContent: "center", paddingHorizontal: 24 },
-  wrapper: { width: "100%", maxWidth: 420, alignSelf: "center" },
-  header: { alignItems: "center", marginBottom: 24 },
-  logo: { width: 76, height: 76, borderRadius: 20, marginBottom: 12 },
-  brandTitle: { fontSize: 26, fontWeight: "800", letterSpacing: 2 },
-  brandSub: { fontSize: 12, fontWeight: "700", letterSpacing: 3.5, marginTop: 3 },
-  welcome: { alignItems: "center", marginBottom: 24 },
-  welcomeTitle: { fontSize: 22, fontWeight: "700", textAlign: "center", marginBottom: 6 },
-  welcomeSub: { fontSize: 14, textAlign: "center", lineHeight: 20 },
-  form: { width: "100%" },
-  label: { fontSize: 14, fontWeight: "600", marginBottom: 8 },
-  phoneRow: { flexDirection: "row", alignItems: "center", gap: 10, width: "100%" },
-  codeBox: { height: 50, width: 58, borderWidth: 1.5, borderRadius: 10, justifyContent: "center", alignItems: "center" },
-  codeText: { fontSize: 15, fontWeight: "600" },
-  input: { flex: 1, height: 50, borderWidth: 1.5, borderRadius: 10, paddingHorizontal: 14, fontSize: 15 },
-  error: { fontSize: 12.5, marginTop: 6, fontWeight: "600" },
-  continueBtn: { marginTop: 18, height: 50 },
-  dividerRow: { flexDirection: "row", alignItems: "center", gap: 12, marginVertical: 20 },
-  dividerLine: { flex: 1, height: 1 },
-  dividerText: { fontSize: 13, fontWeight: "500" },
-  googleBtn: { flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 10, height: 50, borderRadius: 12, borderWidth: 1.5, elevation: 1 },
-  googleText: { fontSize: 15, fontWeight: "600" },
-});

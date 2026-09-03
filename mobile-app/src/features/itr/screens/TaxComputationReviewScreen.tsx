@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {
   View,
   Text,
-  StyleSheet,
   ScrollView,
   TouchableOpacity,
   StatusBar,
@@ -19,6 +18,7 @@ import { ReturnDetailsCard } from "../components/computation/ReturnDetailsCard";
 import { ImportantNotesCard } from "../components/computation/ImportantNotesCard";
 import { ConfirmApprovalModal } from "../components/computation/ConfirmApprovalModal";
 import { RequestChangesBottomSheet } from "../components/computation/RequestChangesBottomSheet";
+import { styles } from "./TaxComputationReviewScreen.styles";
 import {
   DEFAULT_COMPUTATION_DATA,
   DEFAULT_RETURN_DETAILS,
@@ -177,148 +177,5 @@ export const TaxComputationReviewScreen: React.FC = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#F8FAFC",
-  },
-  header: {
-    minHeight: 58,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    paddingHorizontal: 16,
-    paddingVertical: 6,
-    backgroundColor: "#FFFFFF",
-    borderBottomWidth: 1,
-    borderBottomColor: "#F1F5F9",
-  },
-  backButton: {
-    width: 38,
-    height: 38,
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: "#E5E7EB",
-    backgroundColor: "#FFFFFF",
-    justifyContent: "center",
-    alignItems: "center",
-    ...Platform.select({
-      ios: {
-        shadowColor: "#0B1F3A",
-        shadowOffset: { width: 0, height: 1 },
-        shadowOpacity: 0.05,
-        shadowRadius: 2,
-      },
-      android: {
-        elevation: 1,
-      },
-      default: {},
-    }),
-  },
-  headerTitleGroup: {
-    alignItems: "center",
-    justifyContent: "center",
-    flex: 1,
-  },
-  headerTitle: {
-    fontSize: 18,
-    fontWeight: "700",
-    color: "#0B1F3A",
-    letterSpacing: -0.2,
-  },
-  headerSubtitle: {
-    fontSize: 12.5,
-    fontWeight: "500",
-    color: "#0B1F3A",
-    marginTop: 2,
-  },
-  headerRightSpacer: {
-    width: 38,
-  },
-  scrollContent: {
-    paddingHorizontal: 16,
-    paddingTop: 12,
-  },
-  bottomBar: {
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    right: 0,
-    backgroundColor: "#FFFFFF",
-    paddingHorizontal: 16,
-    paddingTop: 10,
-    borderTopWidth: 1,
-    borderTopColor: "#F1F5F9",
-    gap: 8,
-    ...Platform.select({
-      ios: {
-        shadowColor: "#0B1F3A",
-        shadowOffset: { width: 0, height: -3 },
-        shadowOpacity: 0.05,
-        shadowRadius: 6,
-      },
-      android: {
-        elevation: 6,
-      },
-      default: {},
-    }),
-  },
-  approveButton: {
-    height: 50,
-    borderRadius: 14,
-    backgroundColor: "#F97316",
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    gap: 8,
-    ...Platform.select({
-      ios: {
-        shadowColor: "#F97316",
-        shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 0.25,
-        shadowRadius: 8,
-      },
-      android: {
-        elevation: 3,
-      },
-      default: {},
-    }),
-  },
-  approveButtonText: {
-    color: "#FFFFFF",
-    fontSize: 15.5,
-    fontWeight: "700",
-    letterSpacing: 0.2,
-  },
-  requestButton: {
-    height: 48,
-    borderRadius: 14,
-    backgroundColor: "#FFFFFF",
-    borderWidth: 1.5,
-    borderColor: "#0B1F3A",
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    gap: 8,
-  },
-  requestButtonText: {
-    color: "#0B1F3A",
-    fontSize: 15,
-    fontWeight: "700",
-  },
-  trustBadge: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: 5,
-    marginTop: 2,
-  },
-  trustText: {
-    fontSize: 11.5,
-    color: "#64748B",
-    fontWeight: "500",
-  },
-});
 
 export default TaxComputationReviewScreen;

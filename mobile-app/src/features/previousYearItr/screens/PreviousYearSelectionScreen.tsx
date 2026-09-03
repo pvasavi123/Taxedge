@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
   View,
-  StyleSheet,
   ScrollView,
   StatusBar,
   Platform,
@@ -12,6 +11,7 @@ import { PreviousYearHeader } from "../components/PreviousYearHeader";
 import { AssessmentYearSelector } from "../components/AssessmentYearSelector";
 import { ContinueButton } from "../components/ContinueButton";
 import { ASSESSMENT_YEARS } from "../mock/assessmentYearsData";
+import { styles } from "./PreviousYearSelectionScreen.styles";
 
 export const PreviousYearSelectionScreen: React.FC = () => {
   const router = useRouter();
@@ -76,38 +76,5 @@ export const PreviousYearSelectionScreen: React.FC = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#F5F6F8",
-  },
-  scrollContent: {
-    paddingHorizontal: 16,
-  },
-  bottomBar: {
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    right: 0,
-    backgroundColor: "#FFFFFF",
-    paddingHorizontal: 16,
-    paddingTop: 10,
-    borderTopWidth: 1,
-    borderTopColor: "#F1F5F9",
-    ...Platform.select({
-      ios: {
-        shadowColor: "#0B1F3A",
-        shadowOffset: { width: 0, height: -3 },
-        shadowOpacity: 0.04,
-        shadowRadius: 6,
-      },
-      android: {
-        elevation: 6,
-      },
-      default: {},
-    }),
-  },
-});
 
 export default PreviousYearSelectionScreen;
